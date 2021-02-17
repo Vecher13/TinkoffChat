@@ -17,18 +17,40 @@ class LogController{
     
     var oldState: String? = nil
     
-    func showLog(function: String){
+    enum lifeCircle {
+        case app
+        case view
+    }
+    
+    func showLog(function: String, for lifeCircle: lifeCircle){
        
-        if isShowLog == true{
-            
-            if oldState != nil {
-                print("Application moved from '\(states[oldState!]!)' to '\(states[function]!)': \(function)")
-            } else {
-                print("Application moved to '\(states[function]!)' : \(function)")
+        switch lifeCircle {
+        case .app:
+            if isShowLog == true{
+                
+                if oldState != nil {
+                    print("Application moved from '\(states[oldState!]!)' to '\(states[function]!)': \(function)")
+                } else {
+                    print("Application moved to '\(states[function]!)' : \(function)")
+                }
+                
+                oldState = function
             }
-            
-            oldState = function
+        case .view:
+            if isShowLog == true{
+                
+                if oldState != nil {
+                    print("View moved from '\(states[oldState!]!)' to '\(states[function]!)': \(function)")
+                } else {
+                    print("View moved to '\(states[function]!)' : \(function)")
+                }
+                
+                oldState = function
+            }
+        
         }
+        
+        
     }
     let states = [
         "application(_:didFinishLaunchingWithOptions:)" : "almost ready to run",

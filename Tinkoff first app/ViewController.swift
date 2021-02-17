@@ -16,33 +16,33 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
     }
     
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        logVC.showLog(function: #function)
+        logVC.showLog(function: #function, for: .view)
         
     }
 

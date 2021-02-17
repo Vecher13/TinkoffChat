@@ -45,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				5E2201F825DD98000079BFD0 /* .gitignore */,
-				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
 				5EE3287025D7FB4800BFB563 /* Tinkoff first app */,
 				5EE3286F25D7FB4800BFB563 /* Products */,
 			);
@@ -62,6 +61,7 @@
 		5EE3287025D7FB4800BFB563 /* Tinkoff first app */ = {
 			isa = PBXGroup;
 			children = (
+				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
 				5EE3287125D7FB4800BFB563 /* AppDelegate.swift */,
 				5EE3287325D7FB4800BFB563 /* SceneDelegate.swift */,
 				5EE3287525D7FB4800BFB563 /* ViewController.swift */,

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5E2201F925DD98000079BFD0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5E2201F825DD98000079BFD0 /* .gitignore */; };
+		5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */; };
+		5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */; };
+		5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */; };
+		5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80C15C25F17C3E00B75A0E /* DataModel.swift */; };
+		5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A225F03BCA00703A61 /* ChatViewController.swift */; };
+		5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */; };
+		5E8961A825F03C0300703A61 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8961A625F03C0300703A61 /* MessageTableViewCell.xib */; };
 		5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */; };
 		5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB77AD25D93BBE00D0DE14 /* LogController.swift */; };
 		5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287125D7FB4800BFB563 /* AppDelegate.swift */; };
@@ -20,6 +27,13 @@
 
 /* Begin PBXFileReference section */
 		5E2201F825DD98000079BFD0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustoTableViewCell.swift; sourceTree = "<group>"; };
+		5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustoTableViewCell.xib; sourceTree = "<group>"; };
+		5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		5E80C15C25F17C3E00B75A0E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		5E8961A225F03BCA00703A61 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		5E8961A625F03C0300703A61 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5EAB77AD25D93BBE00D0DE14 /* LogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		5EE3286E25D7FB4800BFB563 /* Tinkoff first app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinkoff first app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,11 +77,18 @@
 		5EE3287025D7FB4800BFB563 /* Tinkoff first app */ = {
 			isa = PBXGroup;
 			children = (
+				5E8961A225F03BCA00703A61 /* ChatViewController.swift */,
+				5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */,
+				5E8961A625F03C0300703A61 /* MessageTableViewCell.xib */,
+				5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */,
+				5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */,
 				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
 				5EE3287125D7FB4800BFB563 /* AppDelegate.swift */,
 				5EE3287325D7FB4800BFB563 /* SceneDelegate.swift */,
 				5EE3287525D7FB4800BFB563 /* ViewController.swift */,
 				5EE3287725D7FB4800BFB563 /* Main.storyboard */,
+				5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */,
+				5E80C15C25F17C3E00B75A0E /* DataModel.swift */,
 				5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */,
 				5EE3287A25D7FB4800BFB563 /* Assets.xcassets */,
 				5EE3287C25D7FB4800BFB563 /* LaunchScreen.storyboard */,
@@ -134,8 +155,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E2201F925DD98000079BFD0 /* .gitignore in Resources */,
+				5E8961A825F03C0300703A61 /* MessageTableViewCell.xib in Resources */,
 				5EE3287E25D7FB4800BFB563 /* LaunchScreen.storyboard in Resources */,
 				5EE3287B25D7FB4800BFB563 /* Assets.xcassets in Resources */,
+				5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */,
 				5EE3287925D7FB4800BFB563 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,10 +170,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */,
 				5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */,
+				5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */,
+				5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */,
 				5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */,
+				5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */,
 				5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */,
 				5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */,
+				5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */,
 				5EE3287425D7FB4800BFB563 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

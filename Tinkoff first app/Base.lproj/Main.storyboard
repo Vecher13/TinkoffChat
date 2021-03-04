@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6nw-GK-SF7">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,16 +9,56 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Tinkoff Chat-->
+        <scene sceneID="36G-jC-HKK">
+            <objects>
+                <viewController id="eau-kR-zvD" customClass="ChatListViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w4Y-IH-Keu" customClass="Ch">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="sx2-1q-NnL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="EcI-Nz-VaY">
+                        <barButtonItem key="rightBarButtonItem" image="UserImage" id="JNO-ej-gxC">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" id="ozZ-1I-kfM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="barButton" destination="JNO-ej-gxC" id="e6a-vk-gUM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZM9-fQ-WAx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1416.8" y="157.87106446776613"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="gig-Gu-usv">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="Y9o-90-ODa" customClass="ChatViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dwn-vz-WuO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xid-X2-9qk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N2r-t7-1ZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1417" y="849"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKg-4K-IEG">
-                                <rect key="frame" x="50" y="597" width="275" height="40"/>
+                                <rect key="frame" x="50" y="577" width="275" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dcE-xJ-HeF"/>
@@ -70,14 +110,29 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-S8-duN">
+                                <rect key="frame" x="339" y="16" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="AHl-MR-q2L"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="20" id="bKR-pd-mfY"/>
+                                </constraints>
+                                <state key="normal" image="close">
+                                    <color key="titleColor" red="0.21176470589999999" green="0.2156862745" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R1o-Uh-4iO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oaT-S8-duN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="7El-xb-CJA"/>
                             <constraint firstItem="lup-qv-ckY" firstAttribute="centerY" secondItem="NBT-Db-Dcw" secondAttribute="centerY" id="8Tz-bK-8vr"/>
                             <constraint firstItem="wKg-4K-IEG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BFw-ik-5hV"/>
                             <constraint firstItem="wKg-4K-IEG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="750" constant="50" id="IcQ-nF-LTb"/>
                             <constraint firstItem="4z1-fF-OWj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JrV-EI-y5C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oaT-S8-duN" secondAttribute="trailing" constant="16" id="WB5-1T-q1i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4z1-fF-OWj" secondAttribute="trailing" constant="67" id="WFr-Ap-1GX"/>
                             <constraint firstItem="4z1-fF-OWj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="XEU-xm-lmJ"/>
                             <constraint firstItem="lup-qv-ckY" firstAttribute="centerX" secondItem="NBT-Db-Dcw" secondAttribute="centerX" id="ctf-QP-abz"/>
@@ -99,10 +154,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="712.79999999999995" y="67.016491754122939"/>
+            <point key="canvasLocation" x="2209" y="158"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LiO-Ss-whI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6nw-GK-SF7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hg3-zV-run">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eau-kR-zvD" kind="relationship" relationship="rootViewController" id="mRA-Wr-SSI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1b1-OV-hA2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="477.60000000000002" y="157.87106446776613"/>
         </scene>
     </scenes>
     <resources>
+        <image name="UserImage" width="60" height="60"/>
+        <image name="close" width="1280" height="1280"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

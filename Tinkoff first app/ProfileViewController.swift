@@ -30,9 +30,9 @@ class ProfileViewController: UIViewController {
         secondNameLabel.adjustsFontSizeToFitWidth = true
         
         
+        
         nameLabel.text = "Marina Dudarenko"
         infoLabel.text = "UX/UI designer, web-designer Moscow, Russia"
-        
         
         
         print("ViewDidLoad", editButton.frame)
@@ -45,11 +45,18 @@ class ProfileViewController: UIViewController {
         //будет nil так как кнопка еще не появилсь на view и будет только после метода loadView()
     }
     
+   
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("ViewDidAppear", editButton.frame)
         // изначально приложение берет размеры из устрайства выбранном в .storyboard и то, какие значения frame там заданы. В данном методе уже значения размеров устройств, в котором запустили приложение.
-        profileImage.layer.cornerRadius = profileImage.frame.height/2
+//        profileImage.layer.cornerRadius = profileImage.frame.height/2
     }
     
     @objc func imageTap(_ sender: UITapGestureRecognizer) {
@@ -63,6 +70,9 @@ class ProfileViewController: UIViewController {
             
         }
         
+    }
+    @IBAction func closeView(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     func cameraAlert(){
         let cameraAlert = UIAlertController(title: "Camera issue", message: "Sorry, some error with camera. Use photo frome library", preferredStyle: .alert)

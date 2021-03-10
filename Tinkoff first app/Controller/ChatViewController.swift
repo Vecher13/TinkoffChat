@@ -12,6 +12,7 @@ class ChatViewController: UIViewController {
     var messages: [Message]?
     var message: Message?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +25,8 @@ class ChatViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
         tableView.separatorStyle = .none
         
+        navigationItem.largeTitleDisplayMode = .never
+       
         
         tableView.delegate = self
         
@@ -32,7 +35,6 @@ class ChatViewController: UIViewController {
     
     
     private let cellIdentifier = String(describing: MessageTableViewCell.self)
-
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
 
@@ -47,6 +49,8 @@ class ChatViewController: UIViewController {
 }
 
 extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 49
@@ -82,7 +86,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
             cell.updateMessageCell(by: message)
 //            cell.textMessageLabel.text = message.message
         }
-        
+//        cell.contentView.backgroundColor = Theme.backgroundColor
         
         return cell
     }

@@ -9,7 +9,7 @@ import UIKit
 
 class MessageTableViewCell: UITableViewCell {
     @IBOutlet var textMessageLabel: UILabel!
-    @IBOutlet var bubbleView: UIView!
+    @IBOutlet var bubbleView: CustomView!
     var traillingConstraint: NSLayoutConstraint?
     var leadingConstraints: NSLayoutConstraint?
     
@@ -36,17 +36,19 @@ class MessageTableViewCell: UITableViewCell {
     }
     
     func updateMessageCell(by message: Message){
+        
+        backgroundColor = Theme.backgroundColor
         bubbleView.layer.cornerRadius = 16
         bubbleView.clipsToBounds = true
         traillingConstraint = bubbleView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         leadingConstraints = bubbleView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         textMessageLabel.text = message.message
         if message.fromMe == true{
-            bubbleView.backgroundColor = .systemBlue
+            bubbleView.backgroundColor = Theme.outBubbleColor
             traillingConstraint?.isActive = true
             textMessageLabel.textAlignment = .right
         } else {
-            bubbleView.backgroundColor = .systemGreen
+            bubbleView.backgroundColor = Theme.inBubbleColor
             leadingConstraints?.isActive = true
             textMessageLabel.textAlignment = .left
         }

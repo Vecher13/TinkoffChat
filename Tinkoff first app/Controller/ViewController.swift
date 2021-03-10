@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.view = CustomView()
+        
         logVC.showLog(function: #function, for: .view)
        
     }

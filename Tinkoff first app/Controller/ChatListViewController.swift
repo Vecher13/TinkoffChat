@@ -13,7 +13,10 @@ class ChatListViewController: UIViewController {
    
     @IBOutlet var barButton: UIBarButtonItem!
     
+    let themeManager = ThemesManager.shared.theme
     
+    let cellColor = ThemesManager.shared.theme?.subLabelTextColor
+    let nameColor = ThemesManager.shared.theme?.labelTextColor
     var chatMod: ChatModel?
     
     var online: [ChatModel] = []
@@ -33,10 +36,15 @@ class ChatListViewController: UIViewController {
         
         filteringOnline()
         tableView.delegate = self
+        tableView.backgroundColor = themeManager?.backgroundColor
+       
         
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     private let cellIdentifier = String(describing: CustoTableViewCell.self)
     
@@ -54,6 +62,8 @@ class ChatListViewController: UIViewController {
 
 extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
@@ -65,6 +75,7 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         return section == 0 ? "Online" : "History"
     }
     
@@ -101,27 +112,33 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
         chat = indexPath.section == 0 ? online[indexPath.row] : offline[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustoTableViewCell else {return UITableViewCell()}
-        if chat.online == true {
-            cell.backgroundColor = #colorLiteral(red: 0.9962020516, green: 0.9977405667, blue: 0.8903076352, alpha: 1)
-        } else {
-            cell.backgroundColor = .white
-        }
-        
-        if chat.hasUnreadMessages == false {
-            cell.messageLabel.font = .boldSystemFont(ofSize: 14)
-        } else {
-            cell.messageLabel.font = .systemFont(ofSize: 14)
-        }
-        
-        if chat.message == nil {
-            cell.messageLabel.font = .italicSystemFont(ofSize: 14)
-            cell.messageLabel.text = "No messages. It's time to start!"
-        }
+//        if chat.online == true {
+        //            cell.backgroundColor = #colorLiteral(red: 0.9962020516, green: 0.9977405667, blue: 0.8903076352, alpha: 1)
+        //        } else {
+        //            cell.backgroundColor = .white
+        //        }
+        //
+        //        if chat.hasUnreadMessages == false && chat.message != nil {
+        //            cell.messageLabel.font = .boldSystemFont(ofSize: 14)
+        //        } else if cell.messageLabel != nil{
+        //
+        //            cell.messageLabel.font = .systemFont(ofSize: 14)
+        //        }
+        //
+        //        if chat.message == nil {
+        //            cell.messageLabel.font = .italicSystemFont(ofSize: 14)
+        //            cell.messageLabel.text = "No messages. It's time to start!"
+        //        }
       
         cell.configure(with: .init(name: chat.name, message: chat.message, date: chat.date, online: chat.online, hasUnreadMessages: chat.hasUnreadMessages))
         cell.settingsForCell()
         
-       
+        let themeManager = ThemesManager.shared.theme
+        cell.nameLabel.textColor = themeManager?.labelTextColor
+        cell.messageLabel.textColor = themeManager?.subLabelTextColor
+        cell.timeLabel.textColor =  themeManager?.subLabelTextColor
+        cell.backgroundColor = themeManager?.backgroundColor
+        
         
         
         return cell

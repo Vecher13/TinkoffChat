@@ -20,6 +20,8 @@
 		5EA451AF25F7CFB400DDE495 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA451AE25F7CFB400DDE495 /* SettingsViewController.swift */; };
 		5EA451B325F7E6E900DDE495 /* ThemesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA451B225F7E6E900DDE495 /* ThemesModel.swift */; };
 		5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */; };
+		5EA918C225F94A8B00EC9A66 /* CustomUIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */; };
+		5EA918C525F953DB00EC9A66 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA918C425F953DB00EC9A66 /* With.swift */; };
 		5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB77AD25D93BBE00D0DE14 /* LogController.swift */; };
 		5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287125D7FB4800BFB563 /* AppDelegate.swift */; };
 		5EE3287425D7FB4800BFB563 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287325D7FB4800BFB563 /* SceneDelegate.swift */; };
@@ -43,6 +45,8 @@
 		5EA451AE25F7CFB400DDE495 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5EA451B225F7E6E900DDE495 /* ThemesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesModel.swift; sourceTree = "<group>"; };
 		5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIs.swift; sourceTree = "<group>"; };
+		5EA918C425F953DB00EC9A66 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		5EAB77AD25D93BBE00D0DE14 /* LogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		5EE3286E25D7FB4800BFB563 /* Tinkoff first app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinkoff first app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE3287125D7FB4800BFB563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				5E80C15C25F17C3E00B75A0E /* DataModel.swift */,
 				5EA451B225F7E6E900DDE495 /* ThemesModel.swift */,
+				5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */,
+				5EA918C425F953DB00EC9A66 /* With.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -207,11 +213,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */,
+				5EA918C525F953DB00EC9A66 /* With.swift in Sources */,
 				5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */,
 				5EA451AF25F7CFB400DDE495 /* SettingsViewController.swift in Sources */,
 				5E88892025F80DD200C97728 /* CustomView.swift in Sources */,
 				5EA451B325F7E6E900DDE495 /* ThemesModel.swift in Sources */,
 				5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */,
+				5EA918C225F94A8B00EC9A66 /* CustomUIs.swift in Sources */,
 				5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */,
 				5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */,
 				5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */,

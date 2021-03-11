@@ -10,7 +10,17 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let theme = DarkThemeOld()
     var window: UIWindow?
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        ThemesManager.shared.setTheme(theme: ClassicTheme())
+        
+        
+//        theme.apply(for: application)
+        return true
+    }
+    
     var logVC = LogController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

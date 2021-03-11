@@ -28,8 +28,10 @@ class ProfileViewController: UIViewController {
         profileImage.backgroundColor = #colorLiteral(red: 0.8927419782, green: 0.9104283452, blue: 0, alpha: 1)
         firstNameLabel.adjustsFontSizeToFitWidth = true
         secondNameLabel.adjustsFontSizeToFitWidth = true
-        
-        
+        let colorAssets = ThemesManager.shared.theme
+        view.backgroundColor = colorAssets?.backgroundColor
+        nameLabel.textColor = colorAssets?.labelTextColor
+        infoLabel.textColor = colorAssets?.labelTextColor
         
         nameLabel.text = "Marina Dudarenko"
         infoLabel.text = "UX/UI designer, web-designer Moscow, Russia"

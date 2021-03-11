@@ -13,7 +13,7 @@
         <scene sceneID="36G-jC-HKK">
             <objects>
                 <viewController id="eau-kR-zvD" customClass="ChatListViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="w4Y-IH-Keu" customClass="CustomView2" customModule="Tinkoff_first_app" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="w4Y-IH-Keu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="sx2-1q-NnL"/>
@@ -43,7 +43,7 @@
         <scene sceneID="gig-Gu-usv">
             <objects>
                 <viewController storyboardIdentifier="ChatViewController" id="Y9o-90-ODa" customClass="ChatViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dwn-vz-WuO" customClass="CustomView" customModule="Tinkoff_first_app" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="Dwn-vz-WuO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="xid-X2-9qk"/>
@@ -53,21 +53,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N2r-t7-1ZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1417" y="849"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="d93-s0-qmQ">
-            <objects>
-                <viewController id="2gK-48-NpB" customClass="ViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PSp-vl-PFU" customClass="CustomView" customModule="Tinkoff_first_app" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="cG5-0L-ZVz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mhp-ny-4Sr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2325" y="895"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">

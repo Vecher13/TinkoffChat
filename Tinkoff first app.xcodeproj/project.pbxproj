@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E05996526014A2D00992952 /* jsonData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E05996426014A2D00992952 /* jsonData.json */; };
+		5E0599682602935B00992952 /* GCDUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0599672602935B00992952 /* GCDUploader.swift */; };
+		5E05996C2602B3A600992952 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05996B2602B3A600992952 /* Options.swift */; };
 		5E2201F925DD98000079BFD0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5E2201F825DD98000079BFD0 /* .gitignore */; };
 		5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */; };
 		5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */; };
@@ -29,9 +32,13 @@
 		5EE3287925D7FB4800BFB563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287725D7FB4800BFB563 /* Main.storyboard */; };
 		5EE3287B25D7FB4800BFB563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287A25D7FB4800BFB563 /* Assets.xcassets */; };
 		5EE3287E25D7FB4800BFB563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287C25D7FB4800BFB563 /* LaunchScreen.storyboard */; };
+		5EF3704D2600A503008DD0EF /* HandelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF3704C2600A503008DD0EF /* HandelJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E05996426014A2D00992952 /* jsonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = jsonData.json; sourceTree = "<group>"; };
+		5E0599672602935B00992952 /* GCDUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUploader.swift; sourceTree = "<group>"; };
+		5E05996B2602B3A600992952 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		5E2201F825DD98000079BFD0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustoTableViewCell.swift; sourceTree = "<group>"; };
 		5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustoTableViewCell.xib; sourceTree = "<group>"; };
@@ -56,6 +63,7 @@
 		5EE3287A25D7FB4800BFB563 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EE3287D25D7FB4800BFB563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EE3287F25D7FB4800BFB563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EF3704C2600A503008DD0EF /* HandelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandelJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,9 @@
 				5EA451B225F7E6E900DDE495 /* ThemesModel.swift */,
 				5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */,
 				5EA918C425F953DB00EC9A66 /* With.swift */,
+				5E0599672602935B00992952 /* GCDUploader.swift */,
+				5EF3704C2600A503008DD0EF /* HandelJSON.swift */,
+				5E05996B2602B3A600992952 /* Options.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -135,6 +146,7 @@
 				5EE3287A25D7FB4800BFB563 /* Assets.xcassets */,
 				5EE3287C25D7FB4800BFB563 /* LaunchScreen.storyboard */,
 				5EE3287F25D7FB4800BFB563 /* Info.plist */,
+				5E05996426014A2D00992952 /* jsonData.json */,
 			);
 			path = "Tinkoff first app";
 			sourceTree = "<group>";
@@ -198,6 +210,7 @@
 			files = (
 				5E2201F925DD98000079BFD0 /* .gitignore in Resources */,
 				5E8961A825F03C0300703A61 /* MessageTableViewCell.xib in Resources */,
+				5E05996526014A2D00992952 /* jsonData.json in Resources */,
 				5EE3287E25D7FB4800BFB563 /* LaunchScreen.storyboard in Resources */,
 				5EE3287B25D7FB4800BFB563 /* Assets.xcassets in Resources */,
 				5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */,
@@ -217,6 +230,7 @@
 				5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */,
 				5EA451AF25F7CFB400DDE495 /* SettingsViewController.swift in Sources */,
 				5E88892025F80DD200C97728 /* CustomView.swift in Sources */,
+				5EF3704D2600A503008DD0EF /* HandelJSON.swift in Sources */,
 				5EA451B325F7E6E900DDE495 /* ThemesModel.swift in Sources */,
 				5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */,
 				5EA918C225F94A8B00EC9A66 /* CustomUIs.swift in Sources */,
@@ -224,9 +238,11 @@
 				5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */,
 				5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */,
 				5E88891D25F7FC5C00C97728 /* CustomThemVC.swift in Sources */,
+				5E05996C2602B3A600992952 /* Options.swift in Sources */,
 				5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */,
 				5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */,
 				5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */,
+				5E0599682602935B00992952 /* GCDUploader.swift in Sources */,
 				5EE3287425D7FB4800BFB563 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,16 +8,27 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var profileImage: UIImageView!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var nameLabel: UITextField!
+    @IBOutlet var infoLabel: UITextView!
     @IBOutlet var editButton: UIButton!
     @IBOutlet var firstNameLabel: UILabel!
     @IBOutlet var secondNameLabel: UILabel!
+    @IBOutlet var saveButtons: UIStackView!
     
+    let jsonManager = SaveDataManager()
+    
+    
+    
+    
+     let gcd = GCDUploader()
+    let optionals = OperationUploader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        kB()
+        
         profileImage.isUserInteractionEnabled = true
         let imageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap(_:)))
         profileImage.addGestureRecognizer(imageGesture)
@@ -28,6 +39,8 @@ class ProfileViewController: UIViewController {
         profileImage.backgroundColor = #colorLiteral(red: 0.8927419782, green: 0.9104283452, blue: 0, alpha: 1)
         firstNameLabel.adjustsFontSizeToFitWidth = true
         secondNameLabel.adjustsFontSizeToFitWidth = true
+        saveButtons.isHidden = true
+        
         let colorAssets = ThemesManager.shared.theme
         view.backgroundColor = colorAssets?.backgroundColor
         nameLabel.textColor = colorAssets?.labelTextColor
@@ -36,16 +49,19 @@ class ProfileViewController: UIViewController {
         nameLabel.text = "Marina Dudarenko"
         infoLabel.text = "UX/UI designer, web-designer Moscow, Russia"
         
+       
         
-        print("ViewDidLoad", editButton.frame)
+        
+//        print(jsonManager.saveData(name: "Hi-hi", info: "hihi"))
+//        print("ViewDidLoad", editButton.frame)
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print("Info!!!", editButton?.frame as Any)
-        
-        //будет nil так как кнопка еще не появилсь на view и будет только после метода loadView()
-    }
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        print("Info!!!", editButton?.frame as Any)
+//
+//        //будет nil так как кнопка еще не появилсь на view и будет только после метода loadView()
+//    }
     
    
     
@@ -73,6 +89,28 @@ class ProfileViewController: UIViewController {
         }
         
     }
+    @IBAction func editProfileAction(_ sender: Any) {
+        saveButtons.isHidden = false
+        editButton.isHidden = true
+    }
+    
+    
+    @IBAction func gcdActionButton(_ sender: Any) {
+        saveGCD()
+    }
+    
+    
+    @IBAction func optionalSave(_ sender: Any) {
+        saveOptionals()
+    }
+    
+    
+    @IBAction func cancelSave(_ sender: Any) {
+        saveButtons.isHidden = true
+        editButton.isHidden = false
+    }
+    
+    
     @IBAction func closeView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -135,3 +173,90 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     
 }
 
+extension ProfileViewController {
+    
+     func saveGCD() {
+       
+        gcd.uploadData(data: .init(name: nameLabel.text ?? "", info: infoLabel.text ?? "")) { result in
+            switch result {
+            case .success(let string):
+                print("Super success!", string)
+            case .failure:
+                print("GCD. Somethin was going wrong...")
+            }
+            
+        }
+    }
+    
+    func saveOptionals(){
+        optionals.uploadData(data: .init(name: nameLabel.text ?? "", info: infoLabel.text ?? "")) { result in
+            switch result {
+            case .success(let string):
+                print(string)
+            case .failure:
+                print("UUUPs")
+            }
+        }
+        
+      
+    }
+    
+}
+
+extension ProfileViewController {
+
+    func kB(){
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+          // if keyboard size is not available for some reason, dont do anything
+          return
+        }
+
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height , right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+      }
+
+      @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+            
+        
+        // reset back the content inset to zero after keyboard is gone
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+      }
+    
+    
+    
+    //    deinit {
+//        removeKeyboardNotifications()
+//    }
+    
+//    func registerForKeyboardNotifivations(){
+//        NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//
+//    }
+//    func removeKeyboardNotifications(){
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//    }
+//
+//    @objc func kbWillShow(_ notification: Notification) {
+//        let userInfo = notification.userInfo
+//        let kbFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//        self.scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize?.height ?? 1000)
+//    }
+//    @objc func kbWillHide(){
+//        scrollView.contentOffset = CGPoint.zero
+//    }
+   
+}

@@ -21,6 +21,22 @@ var subHeading : UIColor {get}
 var sepratorColor : UIColor { get }
 var tintColor : UIColor { get }
     var buttonBackgroundColor: UIColor {get}
+    var barStyle: UIBarStyle {get}
+//    func apply(for application: UIApplication)
+}
+extension Theme13 {
+    func applayAppearance(for application: UIApplication){
+        UITableView.appearance().backgroundColor = backgroundColor
+        UITableView.appearance().backgroundView?.backgroundColor = backgroundColor
+        UITableView.appearance().tableHeaderView?.backgroundColor = backgroundColor
+        let tabBarProxy = UITabBar.appearance()
+        tabBarProxy.barStyle = barStyle
+        tabBarProxy.backgroundColor = backgroundColor
+        UINavigationBar.appearance().barStyle = barStyle
+        
+        
+        application.windows.reload()
+    }
 }
 
 struct ClassicTheme : Theme13 {
@@ -36,6 +52,7 @@ var heading: UIColor = UIColor.white
 var subHeading: UIColor = UIColor.gray
 var sepratorColor: UIColor = UIColor.green
 var tintColor: UIColor = UIColor.blue
+    var barStyle: UIBarStyle = .default
 }
 struct NightTheme : Theme13 {
     var buttonBackgroundColor: UIColor = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
@@ -55,11 +72,8 @@ var heading = UIColor.black
 var subHeading = UIColor.purple
 var sepratorColor: UIColor = UIColor.red
 var tintColor: UIColor = UIColor.blue
-    
-//    UITableView.appearance().backgroundColor = .blue
-    static func updateTable (){UIKit.UITableView.appearance().backgroundColor = .blue}
-    
-    
+    var barStyle: UIBarStyle = .black
+  
 }
 
 struct DayTheme: Theme13 {
@@ -85,6 +99,7 @@ struct DayTheme: Theme13 {
     
     var tintColor: UIColor = .blue
     
+    var barStyle: UIBarStyle = .default
     
 }
 // ---!
@@ -99,7 +114,12 @@ class ThemesManager {
     func setTheme(theme : Theme13){
         self.theme = theme
     }
+    
+ 
 }
+
+
+
 
 
 // ---------!!------
@@ -165,6 +185,8 @@ extension Theme12 {
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
             .textColor = secondaryLabelColor
         
+       
+        
         AppLabel.appearance().textColor = labelColor
         AppHeadline.appearance().textColor = secondaryTint
         AppSubhead.appearance().textColor = secondaryLabelColor
@@ -227,7 +249,7 @@ extension Theme12 {
             $0.tintColor = secondaryTint
             $0.onTintColor = secondaryTint
         }
-        
+        UITextView.appearance().textColor = .blue
         extend()
         
         // Ensure existing views render with new theme

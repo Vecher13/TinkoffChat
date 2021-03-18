@@ -46,7 +46,7 @@ setupGestures()
         reloadViews()
         classicView.layer.borderWidth = 2
         classicView.layer.borderColor = #colorLiteral(red: 0.03566086292, green: 0.2021744251, blue: 0.998301208, alpha: 1)
-        
+    
         
         dayView.layer.borderWidth = 1
         nightView.layer.borderColor = #colorLiteral(red: 0.01899982989, green: 0.01900083758, blue: 0.01900029555, alpha: 1)
@@ -60,6 +60,7 @@ setupGestures()
         
         themeManager.setTheme(theme: DayTheme())
         reloadViews()
+       
         dayView.layer.borderWidth = 2
         dayView.layer.borderColor = #colorLiteral(red: 0.03566086292, green: 0.2021744251, blue: 0.998301208, alpha: 1)
         
@@ -75,12 +76,17 @@ setupGestures()
         
         themeManager.setTheme(theme: NightTheme())
         reloadViews()
+       
         dayView.layer.borderWidth = 1
         nightView.layer.borderColor = #colorLiteral(red: 0.03566086292, green: 0.2021744251, blue: 0.998301208, alpha: 1)
         nightView.layer.borderWidth = 2
         classicView.layer.borderWidth = 1
         classicView.layer.borderColor = #colorLiteral(red: 0.01899982989, green: 0.01900083758, blue: 0.01900029555, alpha: 1)
         dayView.layer.borderColor = #colorLiteral(red: 0.01899982989, green: 0.01900083758, blue: 0.01900029555, alpha: 1)
+        UINavigationBar.appearance().barStyle = .black
+        UINavigationBar.appearance().backgroundColor = .black
+        UINavigationBar.appearance().tintColor = .yellow
+      
         print("night selected")
     }
     

@@ -25,7 +25,7 @@ class ChatListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addSubview(tableView)
         barButton.image = #imageLiteral(resourceName: "UserImage")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,9 +41,15 @@ class ChatListViewController: UIViewController {
         
     }
     
+    
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        view.reloadInputViews()
     }
     
     private let cellIdentifier = String(describing: CustoTableViewCell.self)

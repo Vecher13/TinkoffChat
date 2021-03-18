@@ -16,7 +16,10 @@ class ProfileViewController: UIViewController {
     @IBOutlet var firstNameLabel: UILabel!
     @IBOutlet var secondNameLabel: UILabel!
     @IBOutlet var saveButtons: UIStackView!
+    @IBOutlet var saveGCDButton: UIButton!
+    @IBOutlet var saveOptionalsButton: UIButton!
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     let jsonManager = SaveDataManager()
     
     
@@ -28,7 +31,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         kB()
-        
+        loadDataGCD()
         profileImage.isUserInteractionEnabled = true
         let imageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap(_:)))
         profileImage.addGestureRecognizer(imageGesture)
@@ -45,23 +48,18 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = colorAssets?.backgroundColor
         nameLabel.textColor = colorAssets?.labelTextColor
         infoLabel.textColor = colorAssets?.labelTextColor
-        
+        nameLabel.isUserInteractionEnabled = false
+        infoLabel.isUserInteractionEnabled = false
+        profileImage.isUserInteractionEnabled = false
         nameLabel.text = "Marina Dudarenko"
         infoLabel.text = "UX/UI designer, web-designer Moscow, Russia"
         
-       
+        activityIndicator.isHidden = true
         
-        
-//        print(jsonManager.saveData(name: "Hi-hi", info: "hihi"))
-//        print("ViewDidLoad", editButton.frame)
+    
     }
     
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        print("Info!!!", editButton?.frame as Any)
-//
-//        //будет nil так как кнопка еще не появилсь на view и будет только после метода loadView()
-//    }
+
     
    
     
@@ -90,24 +88,43 @@ class ProfileViewController: UIViewController {
         
     }
     @IBAction func editProfileAction(_ sender: Any) {
+       
         saveButtons.isHidden = false
         editButton.isHidden = true
+        self.nameLabel.isUserInteractionEnabled = true
+        self.infoLabel.isUserInteractionEnabled = true
+        profileImage.isUserInteractionEnabled = true
     }
     
     
     @IBAction func gcdActionButton(_ sender: Any) {
         saveGCD()
+        saveGCDButton.isUserInteractionEnabled = false
+        saveOptionalsButton.isUserInteractionEnabled = false
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
     }
     
     
     @IBAction func optionalSave(_ sender: Any) {
         saveOptionals()
+        saveGCDButton.isUserInteractionEnabled = false
+        saveOptionalsButton.isUserInteractionEnabled = false
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
     }
     
     
     @IBAction func cancelSave(_ sender: Any) {
+        optionals.queue.cancelAllOperations()
         saveButtons.isHidden = true
         editButton.isHidden = false
+        nameLabel.isUserInteractionEnabled = false
+        infoLabel.isUserInteractionEnabled = false
+        profileImage.isUserInteractionEnabled = false
+        
+        
+        
     }
     
     
@@ -137,6 +154,43 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
+    }
+    enum SaveOptional {
+        case gcd
+        case optionals
+        
+    }
+    func errorAllert(save: SaveOptional){
+        let alert = UIAlertController(title: "Проблемы с загрузгой", message: "Может еще раз?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Забить", style: .default, handler: {_ in
+            self.saveOptionalsButton.isUserInteractionEnabled = true
+            self.saveGCDButton.isUserInteractionEnabled = true
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
+        
+        }))
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            switch save{
+            case .gcd:
+                self.saveGCD()
+                self.saveOptionalsButton.isUserInteractionEnabled = true
+                self.saveGCDButton.isUserInteractionEnabled = true
+            case .optionals:
+                self.saveOptionals()
+                self.saveOptionalsButton.isUserInteractionEnabled = true
+                self.saveGCDButton.isUserInteractionEnabled = true
+            }
+        
+        }))
+        self.present(alert, animated: true)
+
+    }
+    func successAllert(){
+        let alert = UIAlertController(title: "Успешно засейвелись!", message: "Можно спать спокойно, денные в безопасности!", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+
     }
     
     func didTapUIImage(from source: UIImagePickerController.SourceType){
@@ -181,8 +235,16 @@ extension ProfileViewController {
             switch result {
             case .success(let string):
                 print("Super success!", string)
+                self.saveGCDButton.isUserInteractionEnabled = true
+                self.saveOptionalsButton.isUserInteractionEnabled = true
+                self.successAllert()
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
             case .failure:
                 print("GCD. Somethin was going wrong...")
+                self.errorAllert(save: .gcd)
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
             }
             
         }
@@ -193,15 +255,38 @@ extension ProfileViewController {
             switch result {
             case .success(let string):
                 print(string)
+                self.successAllert()
+                self.saveOptionalsButton.isUserInteractionEnabled = true
+                self.saveGCDButton.isUserInteractionEnabled = true
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
             case .failure:
                 print("UUUPs")
+                self.errorAllert(save: .optionals)
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
+                
             }
         }
         
       
     }
     
+    func loadDataGCD(){
+        gcd.loadData { userData in
+            switch userData {
+            case .success(let data):
+                self.nameLabel.text = data.name
+                self.infoLabel.text = data.info
+            case .failure:
+                print("Could not read data")
+            }
+        }
+    }
+    
 }
+
+
 
 extension ProfileViewController {
 
@@ -236,27 +321,5 @@ extension ProfileViewController {
     
     
     
-    //    deinit {
-//        removeKeyboardNotifications()
-//    }
-    
-//    func registerForKeyboardNotifivations(){
-//        NotificationCenter.default.addObserver(self, selector: #selector(kbWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(kbWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//
-//    }
-//    func removeKeyboardNotifications(){
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-//    }
-//
-//    @objc func kbWillShow(_ notification: Notification) {
-//        let userInfo = notification.userInfo
-//        let kbFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-//        self.scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize?.height ?? 1000)
-//    }
-//    @objc func kbWillHide(){
-//        scrollView.contentOffset = CGPoint.zero
-//    }
    
 }

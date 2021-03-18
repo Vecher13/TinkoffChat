@@ -10,6 +10,7 @@
 		5E05996526014A2D00992952 /* jsonData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E05996426014A2D00992952 /* jsonData.json */; };
 		5E0599682602935B00992952 /* GCDUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0599672602935B00992952 /* GCDUploader.swift */; };
 		5E05996C2602B3A600992952 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05996B2602B3A600992952 /* Options.swift */; };
+		5E0599B426040FEA00992952 /* CommonsThreadSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */; };
 		5E2201F925DD98000079BFD0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5E2201F825DD98000079BFD0 /* .gitignore */; };
 		5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */; };
 		5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */; };
@@ -39,6 +40,7 @@
 		5E05996426014A2D00992952 /* jsonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = jsonData.json; sourceTree = "<group>"; };
 		5E0599672602935B00992952 /* GCDUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUploader.swift; sourceTree = "<group>"; };
 		5E05996B2602B3A600992952 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsThreadSettings.swift; sourceTree = "<group>"; };
 		5E2201F825DD98000079BFD0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustoTableViewCell.swift; sourceTree = "<group>"; };
 		5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustoTableViewCell.xib; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */,
 				5EA918C425F953DB00EC9A66 /* With.swift */,
 				5E0599672602935B00992952 /* GCDUploader.swift */,
+				5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */,
 				5EF3704C2600A503008DD0EF /* HandelJSON.swift */,
 				5E05996B2602B3A600992952 /* Options.swift */,
 			);
@@ -240,6 +243,7 @@
 				5E88891D25F7FC5C00C97728 /* CustomThemVC.swift in Sources */,
 				5E05996C2602B3A600992952 /* Options.swift in Sources */,
 				5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */,
+				5E0599B426040FEA00992952 /* CommonsThreadSettings.swift in Sources */,
 				5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */,
 				5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */,
 				5E0599682602935B00992952 /* GCDUploader.swift in Sources */,

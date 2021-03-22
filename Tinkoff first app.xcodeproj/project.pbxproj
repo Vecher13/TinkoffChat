@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,9 +34,11 @@
 		5EE3287B25D7FB4800BFB563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287A25D7FB4800BFB563 /* Assets.xcassets */; };
 		5EE3287E25D7FB4800BFB563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287C25D7FB4800BFB563 /* LaunchScreen.storyboard */; };
 		5EF3704D2600A503008DD0EF /* HandelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF3704C2600A503008DD0EF /* HandelJSON.swift */; };
+		601EA38C78EBCB71703860A4 /* Pods_Tinkoff_first_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D475A29A3466EFEDD85310D /* Pods-Tinkoff first app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinkoff first app.release.xcconfig"; path = "Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app.release.xcconfig"; sourceTree = "<group>"; };
 		5E05996426014A2D00992952 /* jsonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = jsonData.json; sourceTree = "<group>"; };
 		5E0599672602935B00992952 /* GCDUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUploader.swift; sourceTree = "<group>"; };
 		5E05996B2602B3A600992952 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
@@ -66,6 +68,8 @@
 		5EE3287D25D7FB4800BFB563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EE3287F25D7FB4800BFB563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EF3704C2600A503008DD0EF /* HandelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandelJSON.swift; sourceTree = "<group>"; };
+		729AE73D63ECBFDDBE5907DF /* Pods-Tinkoff first app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinkoff first app.debug.xcconfig"; path = "Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app.debug.xcconfig"; sourceTree = "<group>"; };
+		F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinkoff_first_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,12 +77,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				601EA38C78EBCB71703860A4 /* Pods_Tinkoff_first_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		354EED42164E0D4F900D1D1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				729AE73D63ECBFDDBE5907DF /* Pods-Tinkoff first app.debug.xcconfig */,
+				2D475A29A3466EFEDD85310D /* Pods-Tinkoff first app.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5E8C303D25F55E560010BEA0 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +141,8 @@
 				5E2201F825DD98000079BFD0 /* .gitignore */,
 				5EE3287025D7FB4800BFB563 /* Tinkoff first app */,
 				5EE3286F25D7FB4800BFB563 /* Products */,
+				354EED42164E0D4F900D1D1F /* Pods */,
+				C92DFD962D84B57AA5DAA1C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +170,14 @@
 			path = "Tinkoff first app";
 			sourceTree = "<group>";
 		};
+		C92DFD962D84B57AA5DAA1C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,9 +185,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EE3288225D7FB4800BFB563 /* Build configuration list for PBXNativeTarget "Tinkoff first app" */;
 			buildPhases = (
+				B2E121B080B2200BA38FA474 /* [CP] Check Pods Manifest.lock */,
 				5EE3286A25D7FB4800BFB563 /* Sources */,
 				5EE3286B25D7FB4800BFB563 /* Frameworks */,
 				5EE3286C25D7FB4800BFB563 /* Resources */,
+				813736A1542AFA8F4698229A /* [CP] Embed Pods Frameworks */,
+				5E5FFAA426088A4F006FA1E8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -222,6 +249,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E5FFAA426088A4F006FA1E8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		813736A1542AFA8F4698229A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2E121B080B2200BA38FA474 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tinkoff first app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5EE3286A25D7FB4800BFB563 /* Sources */ = {
@@ -391,6 +477,7 @@
 		};
 		5EE3288325D7FB4800BFB563 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 729AE73D63ECBFDDBE5907DF /* Pods-Tinkoff first app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -411,6 +498,7 @@
 		};
 		5EE3288425D7FB4800BFB563 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D475A29A3466EFEDD85310D /* Pods-Tinkoff first app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

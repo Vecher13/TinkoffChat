@@ -10,9 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     
-    
     let logVC = LogController()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +21,10 @@ class ViewController: UIViewController {
        
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logVC.showLog(function: #function, for: .view)
     }
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -49,6 +45,4 @@ class ViewController: UIViewController {
         
     }
 
-
 }
-

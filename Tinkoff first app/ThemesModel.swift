@@ -57,7 +57,6 @@ var tintColor: UIColor = UIColor.blue
 struct NightTheme : Theme13 {
     var buttonBackgroundColor: UIColor = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     
-    
     var inBabbleColor: UIColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1803921569, alpha: 1)
     
     var outBabbleColor: UIColor = #colorLiteral(red: 0.3607843137, green: 0.3607843137, blue: 0.3607843137, alpha: 1)
@@ -73,6 +72,7 @@ var subHeading = UIColor.purple
 var sepratorColor: UIColor = UIColor.red
 var tintColor: UIColor = UIColor.blue
     var barStyle: UIBarStyle = .black
+    
   
 }
 
@@ -107,20 +107,16 @@ struct DayTheme: Theme13 {
 class ThemesManager {
     var theme : Theme13?
     static var shared : ThemesManager = {
-        let themeneManager  = ThemesManager()
+        let themeneManager = ThemesManager()
         return themeneManager
     }()
     
-    func setTheme(theme : Theme13){
+    func setTheme(theme : Theme13) {
         self.theme = theme
+        
     }
     
- 
 }
-
-
-
-
 
 // ---------!!------
 
@@ -150,7 +146,7 @@ extension Theme12 {
         UITabBar.appearance().with {
             $0.barStyle = barStyle
             $0.tintColor = tint
-            $0.backgroundColor = .white
+            $0.backgroundColor = backgroundColor
         }
         
         UINavigationBar.appearance().with {
@@ -176,7 +172,7 @@ extension Theme12 {
         
         UITableViewCell.appearance().with {
             $0.backgroundColor = .clear
-//            $0.selectionColor = selectionColor
+            $0.selectionColor = selectionColor
         }
         
         UIView.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
@@ -184,8 +180,6 @@ extension Theme12 {
         
         UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
             .textColor = secondaryLabelColor
-        
-       
         
         AppLabel.appearance().textColor = labelColor
         AppHeadline.appearance().textColor = secondaryTint
@@ -254,7 +248,6 @@ extension Theme12 {
         
         // Ensure existing views render with new theme
         
-        
         application.windows.reload()
     }
     
@@ -293,7 +286,6 @@ struct LightThemeOld: Theme12 {
     let barStyle: UIBarStyle = .default
     let barColor: UIUserInterfaceStyle = .light
     
-    
 }
 
 extension UITableViewCell {
@@ -309,7 +301,6 @@ extension UITableViewCell {
         }
     }
 }
-
 
 public extension UIWindow {
     
@@ -331,15 +322,11 @@ public extension Array where Element == UIWindow {
     }
 }
 
+struct OldTheme {
 
-
-
-
-struct oldTheme {
-
-    static var backgroundColor:UIColor?
-    static var buttonTextColor:UIColor?
-    static var buttonBackgroundColor:UIColor?
+    static var backgroundColor: UIColor?
+    static var buttonTextColor: UIColor?
+    static var buttonBackgroundColor: UIColor?
     static var inBubbleColor: UIColor = .systemBlue
     static var outBubbleColor: UIColor = .systemGreen
     static var textColor: UIColor?
@@ -353,6 +340,7 @@ struct oldTheme {
     }
 
     static public func darkTheme() {
+        
 //        self.backgroundColor = UIColor.darkGray
         self.buttonTextColor = UIColor.white
 //        self.buttonBackgroundColor = UIColor.black
@@ -362,7 +350,7 @@ struct oldTheme {
         self.textColor = .white
         self.subTitleColor = .gray
         
-        updateDisplay()
+//        updateDisplay()
     }
     
     static public func classicTheme() {
@@ -378,7 +366,6 @@ struct oldTheme {
         updateDisplay()
     }
     
-
     static public func updateDisplay() {
         
 //        UILabel.appearance(whenContainedInInstancesOf: [UITableView.self, UITableViewCell.self]).textColor = subTitleColor
@@ -386,7 +373,6 @@ struct oldTheme {
 //        UILabel.appearance(whenContainedInInstancesOf: [AppView.self, AppView.self]).textColor = subTitleColor
 //
   
-        
         AppLabel.appearance().textColor = .white
         SubLabel.appearance(whenContainedInInstancesOf: [UITableView.self]).textColor = subTitleColor
 
@@ -396,7 +382,6 @@ struct oldTheme {
      
         let custom = CustomView.appearance()
         custom.backgroundColor = backgroundColor
-        
         
         let proxyTable = UITableView.appearance()
         proxyTable.backgroundColor = backgroundColor

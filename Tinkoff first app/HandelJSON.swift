@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-
-
 struct UserPofile: Codable {
     internal init(name: String, info: String) {
         self.name = name
@@ -35,9 +33,8 @@ class SaveDataManager {
         let url = URL(fileURLWithPath: path!)
         print(url)
         
-        let data = try! Data(contentsOf: url)
+        guard  let data = try? Data(contentsOf: url) else {return}
 //        let obj = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-        
         
         do {
             let userInfo = try JSONDecoder().decode(UserPofile.self, from: data)
@@ -45,10 +42,6 @@ class SaveDataManager {
         } catch {
             print("Some erroes...", error)
         }
-        
-        
-        
-        
         
         //save
 //        print(obj)

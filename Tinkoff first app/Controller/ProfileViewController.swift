@@ -56,12 +56,7 @@ class ProfileViewController: UIViewController {
         
         activityIndicator.isHidden = true
         
-    
     }
-    
-
-    
-   
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -71,7 +66,7 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("ViewDidAppear", editButton.frame)
-        // изначально приложение берет размеры из устрайства выбранном в .storyboard и то, какие значения frame там заданы. В данном методе уже значения размеров устройств, в котором запустили приложение.
+       
 //        profileImage.layer.cornerRadius = profileImage.frame.height/2
     }
     
@@ -105,7 +100,6 @@ class ProfileViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-    
     @IBAction func optionalSave(_ sender: Any) {
         saveOptionals()
         saveGCDButton.isUserInteractionEnabled = false
@@ -113,8 +107,7 @@ class ProfileViewController: UIViewController {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
-    
-    
+
     @IBAction func cancelSave(_ sender: Any) {
         optionals.queue.cancelAllOperations()
         saveButtons.isHidden = true
@@ -122,8 +115,6 @@ class ProfileViewController: UIViewController {
         nameLabel.isUserInteractionEnabled = false
         infoLabel.isUserInteractionEnabled = false
         profileImage.isUserInteractionEnabled = false
-        
-        
         
     }
     
@@ -304,7 +295,7 @@ extension ProfileViewController {
           return
         }
 
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height , right: 0.0)
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
       }
@@ -312,14 +303,10 @@ extension ProfileViewController {
       @objc func keyboardWillHide(notification: NSNotification) {
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
             
-        
         // reset back the content inset to zero after keyboard is gone
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
         
       }
     
-    
-    
-   
 }

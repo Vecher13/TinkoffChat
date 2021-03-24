@@ -17,12 +17,12 @@ class LogController{
     
     var oldState: String? = nil
     
-    enum lifeCircle {
+    enum LifeCircle {
         case app
         case view
     }
     
-    func showLog(function: String, for lifeCircle: lifeCircle){
+    func showLog(function: String, for lifeCircle: LifeCircle){
        
         switch lifeCircle {
         case .app:

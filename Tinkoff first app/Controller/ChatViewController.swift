@@ -6,33 +6,40 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatViewController: UIViewController {
 
-    var messages: [Message]?
+    @IBOutlet var testView: UIView!
+    @IBOutlet var textMessageField: UITextField!
+   
     var message: Message?
-    
-    
+    var messagesList = [Message]()
+    var documentID: String?
+    var myName: String?
+    lazy var db = Firestore.firestore()
+    let myId = UIDevice.current.identifierForVendor!.uuidString
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addSubview(tableView)
-        
+        loadMyProfileData()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: testView.topAnchor).isActive = true
         tableView.separatorStyle = .none
-        
+       
         navigationItem.largeTitleDisplayMode = .never
        
-        
         tableView.delegate = self
         
-        
+        getMessage(documetnID: documentID)
     }
     
+    @IBAction func sendMessage(_ sender: Any) {
+        sendMessage(documentID: documentID)
+    }
     
     private let cellIdentifier = String(describing: MessageTableViewCell.self)
     private lazy var tableView: UITableView = {
@@ -44,13 +51,9 @@ class ChatViewController: UIViewController {
         return tableView
     }()
     
-   
-
 }
 
 extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    
     
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 49
@@ -65,31 +68,94 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let messages = messages else {return 0}
-         
         
-        return messages.count
+        return messagesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        
-       
-
-        message = self.messages![indexPath.row]
-        
-
-        
+        message = self.messagesList[indexPath.row]
+    
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else
-        {return UITableViewCell()}
+        {return UITableViewCell() }
         if let message = message {
             cell.updateMessageCell(by: message)
 //            cell.textMessageLabel.text = message.message
-        }
-//        cell.contentView.backgroundColor = Theme.backgroundColor
         
+//        cell.contentView.backgroundColor = Theme.backgroundColor
+        } else {
+            print("Error send message to cell")
+        }
         return cell
     }
     
+}
+
+extension ChatViewController {
+    func getMessage(documetnID: String?) {
+        guard let iD = documentID else {return}
+        
+        let message = db.collection("channels").document(iD).collection("messages").order(by: "created")
+        message.addSnapshotListener { (documentSnapshot, error) in
+            self.messagesList = []
+            if let error = error {
+                print("Couldn't load message", error)
+            } else {
+                documentSnapshot?.documents.forEach( { (document) in
+                    if let content = document["content"] as? String,
+                       let created = document["created"] as? Timestamp,
+                       let senderId = document["senderId"] as? String,
+                       let senderName = document["senderName"] as? String {
+                        let newMessage = Message(content: content, created: created, senderId: senderId, senderName: senderName)
+                        self.messagesList += [newMessage]
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
+                        }
+                    }
+                    
+                }
+                )
+            }
+            guard let document = documentSnapshot else {return}
+            for message in document.documents {
+            print("message: ", message.data())
+            }
+        }
+    }
     
+    func sendMessage(documentID: String?){
+        guard let iD = documentID else {return}
+        guard let name = myName else {return}
+        let message = db.collection("channels").document(iD).collection("messages")
+        if let messageBody = textMessageField.text {
+            message.addDocument(data: ["content": messageBody,
+                                       "created": Timestamp(),
+                                       "senderId": self.myId,
+                                       "senderName": name
+            ]) {(error) in
+                if let err = error {
+                    print("Can't send the message", err)
+                } else {
+                    self.textMessageField.text = ""
+                    DispatchQueue.main.async {
+                        "1"
+                    }
+                }
+                
+            }
+        }
+    }
+    func loadMyProfileData(){
+        GCDUploader().loadData { userData in
+            switch userData {
+            case .success(let data):
+                self.myName = data.name
+                
+            case .failure:
+                print("Could not read data")
+            }
+        }
+    }
 }

@@ -4,34 +4,43 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tinkoff Chat-->
+        <!--Channels-->
         <scene sceneID="36G-jC-HKK">
             <objects>
                 <viewController id="eau-kR-zvD" customClass="ChatListViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w4Y-IH-Keu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="sx2-1q-NnL"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tinkoff Chat" id="EcI-Nz-VaY">
+                    <navigationItem key="navigationItem" title="Channels" id="EcI-Nz-VaY">
                         <barButtonItem key="leftBarButtonItem" title="Settings" image="Settings" id="duo-Ls-U59">
                             <connections>
                                 <segue destination="pdy-4D-7wk" kind="show" id="Xsc-jJ-FRQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="UserImage" id="JNO-ej-gxC">
-                            <connections>
-                                <segue destination="gsU-C7-2Up" kind="presentation" id="ozZ-1I-kfM"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="bv8-IR-fv9">
+                                <connections>
+                                    <action selector="addChannel:" destination="eau-kR-zvD" id="X9c-2f-skq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="UserImage" id="JNO-ej-gxC">
+                                <connections>
+                                    <segue destination="gsU-C7-2Up" kind="presentation" id="ozZ-1I-kfM"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addChannelButton" destination="bv8-IR-fv9" id="zl7-qx-gyz"/>
                         <outlet property="barButton" destination="JNO-ej-gxC" id="e6a-vk-gUM"/>
                     </connections>
                 </viewController>
@@ -46,9 +55,59 @@
                     <view key="view" contentMode="scaleToFill" id="Dwn-vz-WuO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SA4-On-18n">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Sqh-Fe-4Jn">
+                                        <rect key="frame" x="20" y="5" width="374" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tap message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JUn-MY-JZq">
+                                                <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
+                                                <color key="backgroundColor" red="0.21176470589999999" green="0.2156862745" blue="0.21960784310000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-vv-Pzg">
+                                                <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="elL-yz-nHI"/>
+                                                </constraints>
+                                                <color key="tintColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="paperplane.fill" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="sendMessage:" destination="Y9o-90-ODa" eventType="touchUpInside" id="lwC-vn-DjC"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Sqh-Fe-4Jn" firstAttribute="top" secondItem="SA4-On-18n" secondAttribute="top" constant="5" id="3er-bj-T7G"/>
+                                    <constraint firstAttribute="height" constant="50" id="Bwe-kA-QKX"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sqh-Fe-4Jn" secondAttribute="bottom" constant="5" id="GW1-9y-ddj"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sqh-Fe-4Jn" secondAttribute="trailing" constant="20" id="URE-8N-8gD"/>
+                                    <constraint firstItem="Sqh-Fe-4Jn" firstAttribute="leading" secondItem="SA4-On-18n" secondAttribute="leading" constant="20" id="zzq-cf-sJC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xid-X2-9qk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SA4-On-18n" firstAttribute="leading" secondItem="xid-X2-9qk" secondAttribute="leading" id="2Sa-WU-6Yy"/>
+                            <constraint firstItem="xid-X2-9qk" firstAttribute="trailing" secondItem="SA4-On-18n" secondAttribute="trailing" id="Xxj-bY-wHI"/>
+                            <constraint firstItem="xid-X2-9qk" firstAttribute="bottom" secondItem="SA4-On-18n" secondAttribute="bottom" id="sXx-5L-Anw"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="testView" destination="SA4-On-18n" id="fdS-ri-poQ"/>
+                        <outlet property="textMessageField" destination="JUn-MY-JZq" id="KL5-MW-erC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N2r-t7-1ZT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -253,11 +312,11 @@
             <objects>
                 <viewController id="pdy-4D-7wk" customClass="SettingsViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o0x-iT-LWF" customClass="CustomView" customModule="Tinkoff_first_app" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="c1h-5o-C3r">
-                                <rect key="frame" x="37" y="247" width="340" height="402"/>
+                                <rect key="frame" x="37" y="203" width="340" height="402"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vpl-qT-fTu">
                                         <rect key="frame" x="0.0" y="0.0" width="340" height="107.5"/>
@@ -403,7 +462,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6nw-GK-SF7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="hg3-zV-run">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" largeTitles="YES" id="hg3-zV-run">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -444,6 +503,7 @@
         <image name="day out" width="58.5" height="12.5"/>
         <image name="night in" width="58.5" height="12.5"/>
         <image name="night out" width="58.5" height="12.5"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

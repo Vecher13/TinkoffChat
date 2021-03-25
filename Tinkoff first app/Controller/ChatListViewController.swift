@@ -167,13 +167,28 @@ extension ChatListViewController {
         }
         alert.addAction(UIAlertAction(title: "Создать", style: .default, handler: {[weak alert] _ in
             guard let textField = alert?.textFields else {return}
-            if let text = textField[0].text {
+            if textField[0].text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
+                guard let text = textField[0].text?.trimmingCharacters(in: .whitespacesAndNewlines) else {return}
                 self.createChannel(name: text)
+            } else {
+                print("No channel's name")
+                self.allertError()
             }
+            
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
-
+    }
+    func allertError() {
+        let alert = UIAlertController(title: "Введите имя канала", message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            self.addChannel()
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
     }
 }

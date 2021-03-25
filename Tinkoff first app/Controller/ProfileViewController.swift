@@ -22,9 +22,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     let jsonManager = SaveDataManager()
     
-    
-    
-    
      let gcd = GCDUploader()
     let optionals = OperationUploader()
     
@@ -60,7 +57,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        profileImage.layer.cornerRadius = profileImage.frame.height / 2
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,10 +72,9 @@ class ProfileViewController: UIViewController {
         let center: CGPoint = .init(x: profileImage.frame.width / 2, y: profileImage.frame.height / 2)
         let location = sender.location(in: profileImage)
         let radius = profileImage.frame.width / 2
-        let distance:CGFloat = sqrt(CGFloat(powf((Float(center.x - location.x)), 2) + powf((Float(center.y - location.y)), 2)))
-        if(distance < radius) {
+        let distance: CGFloat = sqrt(CGFloat(powf((Float(center.x - location.x)), 2) + powf((Float(center.y - location.y)), 2)))
+        if distance < radius {
             allert()
-            
         }
         
     }
@@ -90,7 +86,6 @@ class ProfileViewController: UIViewController {
         self.infoLabel.isUserInteractionEnabled = true
         profileImage.isUserInteractionEnabled = true
     }
-    
     
     @IBAction func gcdActionButton(_ sender: Any) {
         saveGCD()
@@ -118,23 +113,22 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
     @IBAction func closeView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    func cameraAlert(){
+    func cameraAlert() {
         let cameraAlert = UIAlertController(title: "Camera issue", message: "Sorry, some error with camera. Use photo frome library", preferredStyle: .alert)
         cameraAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(cameraAlert, animated: true)
     }
     
-    func allert(){
+    func allert() {
         let alert = UIAlertController(title: "Choose a picture from...", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler:{action in
+        alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
             self.didTapUIImage(from: .photoLibrary)
         }))
-        alert.addAction(UIAlertAction(title: "Take Picture with Camera", style: .default, handler: {action in
+        alert.addAction(UIAlertAction(title: "Take Picture with Camera", style: .default, handler: {_ in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 self.didTapUIImage(from: .camera)
             } else {
@@ -151,7 +145,7 @@ class ProfileViewController: UIViewController {
         case optionals
         
     }
-    func errorAllert(save: SaveOptional){
+    func errorAllert(save: SaveOptional) {
         let alert = UIAlertController(title: "Проблемы с загрузгой", message: "Может еще раз?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Забить", style: .default, handler: {_ in
             self.saveOptionalsButton.isUserInteractionEnabled = true
@@ -160,8 +154,8 @@ class ProfileViewController: UIViewController {
             self.activityIndicator.startAnimating()
         
         }))
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
-            switch save{
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            switch save {
             case .gcd:
                 self.saveGCD()
                 self.saveOptionalsButton.isUserInteractionEnabled = true
@@ -176,7 +170,7 @@ class ProfileViewController: UIViewController {
         self.present(alert, animated: true)
 
     }
-    func successAllert(){
+    func successAllert() {
         let alert = UIAlertController(title: "Успешно засейвелись!", message: "Можно спать спокойно, денные в безопасности!", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -184,7 +178,7 @@ class ProfileViewController: UIViewController {
 
     }
     
-    func didTapUIImage(from source: UIImagePickerController.SourceType){
+    func didTapUIImage(from source: UIImagePickerController.SourceType) {
         let ipc = UIImagePickerController()
         ipc.sourceType = source
         ipc.delegate = self
@@ -193,14 +187,11 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
-    
-    
 }
 
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImage.image = image
@@ -241,7 +232,7 @@ extension ProfileViewController {
         }
     }
     
-    func saveOptionals(){
+    func saveOptionals() {
         optionals.uploadData(data: .init(name: nameLabel.text ?? "", info: infoLabel.text ?? "")) { result in
             switch result {
             case .success(let string):
@@ -260,10 +251,9 @@ extension ProfileViewController {
             }
         }
         
-      
     }
     
-    func loadDataGCD(){
+    func loadDataGCD() {
         gcd.loadData { userData in
             switch userData {
             case .success(let data):
@@ -277,11 +267,9 @@ extension ProfileViewController {
     
 }
 
-
-
 extension ProfileViewController {
 
-    func kB(){
+    func kB() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
             
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)

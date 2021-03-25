@@ -12,7 +12,8 @@ class ChatViewController: UIViewController {
 
     @IBOutlet var testView: UIView!
     @IBOutlet var textMessageField: UITextField!
-   
+    @IBOutlet var sendButton: UIButton!
+    
     var message: Message?
     var messagesList = [Message]()
     var documentID: String?
@@ -29,16 +30,21 @@ class ChatViewController: UIViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: testView.topAnchor).isActive = true
         tableView.separatorStyle = .none
-       
+//        testView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         navigationItem.largeTitleDisplayMode = .never
-       
+       kB()
+        hideKeyboardOnTapOnScren()
         tableView.delegate = self
         
         getMessage(documetnID: documentID)
     }
     
     @IBAction func sendMessage(_ sender: Any) {
+        if textMessageField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
         sendMessage(documentID: documentID)
+        } else {
+           print("need some text")
+        }
     }
     
     private let cellIdentifier = String(describing: MessageTableViewCell.self)
@@ -76,8 +82,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     
         message = self.messagesList[indexPath.row]
     
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else
-        {return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else { return UITableViewCell() }
         if let message = message {
             cell.updateMessageCell(by: message)
 //            cell.textMessageLabel.text = message.message
@@ -99,9 +104,10 @@ extension ChatViewController {
         message.addSnapshotListener { (documentSnapshot, error) in
             self.messagesList = []
             if let error = error {
+//                self.alert()
                 print("Couldn't load message", error)
             } else {
-                documentSnapshot?.documents.forEach( { (document) in
+                documentSnapshot?.documents.forEach({ (document) in
                     if let content = document["content"] as? String,
                        let created = document["created"] as? Timestamp,
                        let senderId = document["senderId"] as? String,
@@ -125,11 +131,11 @@ extension ChatViewController {
         }
     }
     
-    func sendMessage(documentID: String?){
+    func sendMessage(documentID: String?) {
         guard let iD = documentID else {return}
         guard let name = myName else {return}
         let message = db.collection("channels").document(iD).collection("messages")
-        if let messageBody = textMessageField.text {
+        if let messageBody = textMessageField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
             message.addDocument(data: ["content": messageBody,
                                        "created": Timestamp(),
                                        "senderId": self.myId,
@@ -139,15 +145,13 @@ extension ChatViewController {
                     print("Can't send the message", err)
                 } else {
                     self.textMessageField.text = ""
-                    DispatchQueue.main.async {
-                        "1"
-                    }
+                    
                 }
                 
             }
         }
     }
-    func loadMyProfileData(){
+    func loadMyProfileData() {
         GCDUploader().loadData { userData in
             switch userData {
             case .success(let data):
@@ -158,4 +162,64 @@ extension ChatViewController {
             }
         }
     }
+    
+    func alert() {
+        
+            let alert = UIAlertController(title: "Проблемы с загрузгой", message: "Может еще раз?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Забить", style: .default, handler: {_ in
+               self.dismiss(animated: true, completion: nil)
+            
+            }))
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self.getMessage(documetnID: self.documentID)
+            
+            }))
+            self.present(alert, animated: true)
+    }
+    
+}
+
+extension ChatViewController {
+    
+    // MARK: - keyboard control
+    
+    func kB() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
+        else {
+          // if keyboard size is not available for some reason, dont do anything
+          return
+        }
+       
+        additionalSafeAreaInsets.bottom = keyboardSize
+//        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+        
+      }
+
+      @objc func keyboardWillHide(notification: NSNotification) {
+//        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+            
+        // reset back the content inset to zero after keyboard is gone
+        additionalSafeAreaInsets.bottom = 0
+        
+      }
+    
+    func hideKeyboardOnTapOnScren() {
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
+                   target: self,
+                   action: #selector(self.dismissKeyboard))
+
+               self.view.addGestureRecognizer(tapRecognizer)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
 }

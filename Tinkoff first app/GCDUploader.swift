@@ -8,9 +8,6 @@
 import Foundation
 import UIKit
 
-
-
-
 class GCDUploader {
     private let queue = DispatchQueue.global(qos: .utility)
     
@@ -30,7 +27,4 @@ class GCDUploader {
             }
         }
     }
-    
-    
 }
-

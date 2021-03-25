@@ -22,4 +22,3 @@ class CustomView2: UIView {
     let secondColor = CGColor.self
     
 }
-

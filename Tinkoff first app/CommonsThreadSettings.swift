@@ -22,8 +22,6 @@ func dataLoad(data: UserPofile, completion: @escaping (Result<String, Error>) ->
                                                             in: .userDomainMask).first {
             let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
             
-            
-            
             do {
                 
                 try jsonData.write(to: pathWithFilename, options: .atomic)
@@ -37,7 +35,7 @@ func dataLoad(data: UserPofile, completion: @escaping (Result<String, Error>) ->
             }
         }
         
-        //read
+        // read
         
         if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                             in: .userDomainMask).first {
@@ -45,7 +43,6 @@ func dataLoad(data: UserPofile, completion: @escaping (Result<String, Error>) ->
             
             guard let data2 = try? Data(contentsOf: pathWithFilename) else { return }
             //        let obj = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            
             
             do {
                 let userInfo = try JSONDecoder().decode(UserPofile.self, from: data2)
@@ -55,39 +52,14 @@ func dataLoad(data: UserPofile, completion: @escaping (Result<String, Error>) ->
                 print("Some erroes...", error)
             }
             
-            
         }
         
-        
-        
     }
-    
     
 }
 
 func readData(completion: @escaping (Result<UserPofile, Error>) -> Void) {
-    
-    
-        
-//        if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
-//                                                            in: .userDomainMask).first {
-//            let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
-//
-//
-//            do {
-//
-//                try jsonData.write(to: pathWithFilename, options: .atomic)
-//                if String(data: jsonData, encoding: .utf8) != nil {
-//                    completion(.success("Успех!"))
-//                }
-//            } catch {
-//
-//                completion(.failure(UoloadOperationError.badLoading))
-//                print("Not today", error)
-//            }
-//        }
-        
-        //read
+        // read
         
         if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
                                                             in: .userDomainMask).first {
@@ -95,7 +67,6 @@ func readData(completion: @escaping (Result<UserPofile, Error>) -> Void) {
             
             guard let data2 = try? Data(contentsOf: pathWithFilename) else { return }
             //        let obj = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            
             
             do {
                 let userInfo = try JSONDecoder().decode(UserPofile.self, from: data2)
@@ -106,12 +77,6 @@ func readData(completion: @escaping (Result<UserPofile, Error>) -> Void) {
                 print("Some erroes...", error)
             }
             
-            
         }
         
-        
-        
-    
-    
-    
 }

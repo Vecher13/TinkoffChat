@@ -21,9 +21,6 @@ struct UserPofile: Codable {
 class SaveDataManager {
    
     var jsonData: UserPofile?
-    let nameUser = "Alisa"
-    let info = "STPP"
-    let someData = UserPofile.init(name: "Asgg", info: "I'm a programmer!")
     
     func saveData(name: String, info: String) {
         jsonData = .init(name: name, info: info)
@@ -42,52 +39,6 @@ class SaveDataManager {
         } catch {
             print("Some erroes...", error)
         }
-        
-        //save
-//        print(obj)
-//        let encoder = JSONEncoder()
-//        encoder.outputFormatting = .prettyPrinted
-//        if let jsonData = try? JSONEncoder().encode(self.someData) {
-//            
-//            if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
-//                                                                in: .userDomainMask).first {
-//                let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
-//            
-//            
-//   
-//            }
-//            
-//            
-//            // read new
-//            if let documentDirectory = FileManager.default.urls(for: .documentDirectory,
-//                                                                in: .userDomainMask).first {
-//                let pathWithFilename = documentDirectory.appendingPathComponent("myJsonString.json")
-//            
-//            let data2 = try! Data(contentsOf: pathWithFilename)
-//    //        let obj = try! JSONSerialization.jsonObject(with: data, options: .allowFragments)
-//            
-//            
-//            do {
-//                let userInfo = try JSONDecoder().decode(UserPofile.self, from: data2)
-//                print("User info is Here", userInfo.name, userInfo.info)
-//            } catch {
-//                print("Some erroes...", error)
-//            }
-//            
-//            
-//            }
-//        }
-//        
-//  
-//        //save
-//        let str = self.nameUser
-//        let dict = NSMutableDictionary()
-//        dict.setValue(str, forKey: "")
-//        dict.write(to: url, atomically: true)
-//        
-//        
-//        //save ver 2
-//        
         
     }
 }

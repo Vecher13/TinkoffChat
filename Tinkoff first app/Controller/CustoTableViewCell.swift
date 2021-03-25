@@ -8,10 +8,7 @@
 import UIKit
 import Firebase
 
-
 class CustoTableViewCell: UITableViewCell {
-    
-    
     
     @IBOutlet var avatarImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -33,59 +30,30 @@ class CustoTableViewCell: UITableViewCell {
         //        avatarImage.image = nil
     }
     
-    func configure(with model: Channel)
-    {
+    func configure(with model: Channel) {
+        guard let givenDate = model.lastActivity?.seconds else {return}
         
-        nameLabel.text = (model.name != nil) ? model.name : "Some Persone"
-        //        guard model.date != nil else {return timeLabel.text = ""}
-        //        if model.name != nil {
-        //            nameLabel.text = model.name
-        //        } else {
-        //            nameLabel.text = "Some Person"
-        //        }
+        let date = Date(timeIntervalSince1970: Double(givenDate))
+        let formater = DateFormatter()
+        formater.timeStyle = .short
         
-        let formatter = DateFormatter()
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            formater.dateStyle = .none
+            timeLabel.text = formater.string(from: date)
+        } else {
+            formater.dateFormat = "dd MMMM"
+            timeLabel.text = formater.string(from: date)
+        }
         
-        formatter.dateFormat = "dd.MM.yy HH:mm"
-        timeLabel.text = (model.lastActivity != nil) ? formatter.string(from: model.lastActivity?.dateValue() ?? Date.init(timeIntervalSince1970: 1)) : ""
-        //        timeLabel.text = "\(formatter.string(from: date))"
-        var sender: String{
+        nameLabel.text = (model.name != "") ? model.name : "Some Channel"
+        var sender: String {
             return "name"
         }
         messageLabel.text = (model.lastMessage != nil) ? model.lastMessage : "No messages"
-        //        if model.message == nil {
-        //            messageLabel.font = .italicSystemFont(ofSize: 14)
-        //            messageLabel.text = "No messages. It's time to start!"
-        //            timeLabel.text = nil
-        //        } else {
-        //            messageLabel.text = model.message?.last?.message
-        //        }
-        //
-        //        if model.online == true {
-        //            backgroundColor = #colorLiteral(red: 0.9962020516, green: 0.9977405667, blue: 0.8903076352, alpha: 1)
-        //        } else {
-        //            backgroundColor = .white
-        //        }
-        //
-        //        if model.hasUnreadMessages == false && model.message != nil {
-        //            messageLabel.font = .boldSystemFont(ofSize: 14)
-        //        } else if messageLabel != nil{
-        //
-        //            messageLabel.font = .systemFont(ofSize: 14)
-        //        }
-        //
-        //        if model.message == nil {
-        //            messageLabel.font = .italicSystemFont(ofSize: 14)
-        //            messageLabel.text = "No messages. It's time to start!"
-        //        }
-        
-        //        messageLabel.text = model.message?.last?.message
-        
-        
-        
     }
     
-    func settingsForCell(){
+    func settingsForCell() {
         avatarImage.layer.cornerRadius = avatarImage.frame.width / 2
         
     }

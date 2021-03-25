@@ -11,8 +11,6 @@ import UIKit
 class OperationUploader {
      let queue = OperationQueue()
     
-    
-    
     func uploadData(data: UserPofile, completion: @escaping (Result<String, Error>) -> Void) {
         
         let dataUploadOperation = DataUploadoadOperation(data: data)
@@ -121,5 +119,3 @@ class DataUploadoadOperation: AsyncOperation {
 //        }
     }
 }
-
-

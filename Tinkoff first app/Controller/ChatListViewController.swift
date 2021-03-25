@@ -8,7 +8,6 @@
 import UIKit
 import Firebase
 
-
 class ChatListViewController: UIViewController {
    
     @IBOutlet var barButton: UIBarButtonItem!
@@ -49,12 +48,10 @@ class ChatListViewController: UIViewController {
         view.reloadInputViews()
     }
     
-    
     @IBAction func addChannel(_ sender: Any) {
         addChannel()
     }
-    
-    
+
     private let cellIdentifier = String(describing: CustoTableViewCell.self)
     
     private lazy var tableView: UITableView = {
@@ -82,7 +79,6 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
         return channelsList.count
     }
     
-   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         var chat: Channel?
@@ -110,11 +106,7 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
         secondVC.documentID = chat.identifier
-        if chat.name != nil {
         secondVC.title = chat.name
-        } else {
-            secondVC.title = "Chat with Incognito"
-        }
         show(secondVC, sender: nil)
 //        present(secondVC, animated: true, completion: nil)
         
@@ -126,17 +118,17 @@ extension ChatListViewController {
     
     func getChannelsList() {
         
-        channels.addSnapshotListener() { (snapshot, err) in
+        channels.addSnapshotListener { (snapshot, err) in
             self.channelsList = []
             if let err = err {
                 print("Error getting data", err)
             } else {
               
-                snapshot?.documents.forEach( { (document) in
+                snapshot?.documents.forEach({ (document) in
                     let data = document.data()
                     print(document.documentID)
                     print(data)
-                    if let identifier = document.documentID as? String,
+                    if let identifier = document.documentID as String?,
                        let name1 = data["name"] as? String,
                        let lastMessage = data["lastMessage"] as? String?,
                        let lastActivity = data["lastActivity"] as? Timestamp? {
@@ -153,30 +145,29 @@ extension ChatListViewController {
             }
         }
         
-        
     }
     
-    func createChannel(name: String?){
+    func createChannel(name: String?) {
         if let name = name {
         db.collection("channels").addDocument(data: ["name": name,
-                                                     "lastActivity":Timestamp()
+                                                     "lastActivity": Timestamp()
         ]) {(error) in
             if let err = error {
                 print("Can't send the message", err)
-            } 
+            }
             
         }
         }
     }
     
-    func addChannel(){
+    func addChannel() {
         let alert = UIAlertController(title: "Создать новый канал", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Введите имя канала"
         }
         alert.addAction(UIAlertAction(title: "Создать", style: .default, handler: {[weak alert] _ in
             guard let textField = alert?.textFields else {return}
-            if let text = textField[0].text{
+            if let text = textField[0].text {
                 self.createChannel(name: text)
             }
         }))

@@ -8,24 +8,23 @@
 import Foundation
 import UIKit
 
-
 protocol Theme13 {
-var backgroundColor : UIColor { get }
-var secondaryBackgroundColor : UIColor {get}
+var backgroundColor: UIColor { get }
+var secondaryBackgroundColor: UIColor {get}
 var labelTextColor: UIColor {get}
 var subLabelTextColor: UIColor {get}
 var inBabbleColor: UIColor {get}
 var outBabbleColor: UIColor {get}
-var heading : UIColor {get}
-var subHeading : UIColor {get}
-var sepratorColor : UIColor { get }
-var tintColor : UIColor { get }
+var heading: UIColor {get}
+var subHeading: UIColor {get}
+var sepratorColor: UIColor { get }
+var tintColor: UIColor { get }
     var buttonBackgroundColor: UIColor {get}
     var barStyle: UIBarStyle {get}
 //    func apply(for application: UIApplication)
 }
 extension Theme13 {
-    func applayAppearance(for application: UIApplication){
+    func applayAppearance(for application: UIApplication) {
         UITableView.appearance().backgroundColor = backgroundColor
         UITableView.appearance().backgroundView?.backgroundColor = backgroundColor
         UITableView.appearance().tableHeaderView?.backgroundColor = backgroundColor
@@ -34,12 +33,11 @@ extension Theme13 {
         tabBarProxy.backgroundColor = backgroundColor
         UINavigationBar.appearance().barStyle = barStyle
         
-        
         application.windows.reload()
     }
 }
 
-struct ClassicTheme : Theme13 {
+struct ClassicTheme: Theme13 {
     var buttonBackgroundColor: UIColor = #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
     
 var inBabbleColor: UIColor = #colorLiteral(red: 0.8745098039, green: 0.8745098039, blue: 0.8745098039, alpha: 1)
@@ -54,7 +52,7 @@ var sepratorColor: UIColor = UIColor.green
 var tintColor: UIColor = UIColor.blue
     var barStyle: UIBarStyle = .default
 }
-struct NightTheme : Theme13 {
+struct NightTheme: Theme13 {
     var buttonBackgroundColor: UIColor = #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.1058823529, alpha: 1)
     
     var inBabbleColor: UIColor = #colorLiteral(red: 0.1803921569, green: 0.1803921569, blue: 0.1803921569, alpha: 1)
@@ -73,7 +71,6 @@ var sepratorColor: UIColor = UIColor.red
 var tintColor: UIColor = UIColor.blue
     var barStyle: UIBarStyle = .black
     
-  
 }
 
 struct DayTheme: Theme13 {
@@ -105,13 +102,13 @@ struct DayTheme: Theme13 {
 // ---!
 
 class ThemesManager {
-    var theme : Theme13?
-    static var shared : ThemesManager = {
+    var theme: Theme13?
+    static var shared: ThemesManager = {
         let themeneManager = ThemesManager()
         return themeneManager
     }()
     
-    func setTheme(theme : Theme13) {
+    func setTheme(theme: Theme13) {
         self.theme = theme
         
     }
@@ -262,7 +259,7 @@ struct DarkThemeOld: Theme12 {
     
     let backgroundColor: UIColor = .black
     let separatorColor: UIColor = .lightGray
-    let selectionColor: UIColor = .init(red: 38/255, green: 38/255, blue: 40/255, alpha: 1)
+    let selectionColor: UIColor = .init(red: 38 / 255, green: 38 / 255, blue: 40 / 255, alpha: 1)
     
     let labelColor: UIColor = .white
     let secondaryLabelColor: UIColor = .lightGray
@@ -277,7 +274,7 @@ struct LightThemeOld: Theme12 {
     
     let backgroundColor: UIColor = .white
     let separatorColor: UIColor = .lightGray
-    let selectionColor: UIColor = .init(red: 236/255, green: 236/255, blue: 236/255, alpha: 1)
+    let selectionColor: UIColor = .init(red: 236 / 255, green: 236 / 255, blue: 236 / 255, alpha: 1)
     
     let labelColor: UIColor = .black
     let secondaryLabelColor: UIColor = .darkGray

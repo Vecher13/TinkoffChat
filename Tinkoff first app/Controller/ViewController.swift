@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    
     let logVC = LogController()
     
     override func viewDidLoad() {

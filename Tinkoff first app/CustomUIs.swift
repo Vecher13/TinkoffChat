@@ -8,15 +8,11 @@
 import Foundation
 import UIKit
 
-//AppLabel.swift:
+// AppLabel.swift:
 
 class SubLabel: UILabel {
     
 }
-
-
-
-
 
 class AppLabel: UILabel {
     
@@ -33,7 +29,7 @@ class AppSubhead: UILabel {
 class AppFootnote: UILabel {
     
 }
-//AppButton.swift:
+// AppButton.swift:
 
 class AppButton: UIButton {
     
@@ -42,12 +38,12 @@ class AppButton: UIButton {
 class AppDangerButton: UIButton {
     
 }
-//AppSwitch.swift:
+// AppSwitch.swift:
 
 class AppSwitch: UISwitch {
     
 }
-//AppView.swift:
+// AppView.swift:
 
 class AppView: UIView {
     

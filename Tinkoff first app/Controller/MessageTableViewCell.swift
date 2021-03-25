@@ -11,12 +11,13 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet var textMessageLabel: UILabel!
     @IBOutlet var bubbleView: UILabel!
     @IBOutlet var senderName: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     var traillingConstraint: NSLayoutConstraint?
     var leadingConstraints: NSLayoutConstraint?
     
     var themeManager = ThemesManager.shared.theme
     
-    let id = UIDevice.current.identifierForVendor!.uuidString
+    let id = UIDevice.current.identifierForVendor?.uuidString
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -32,6 +33,18 @@ class MessageTableViewCell: UITableViewCell {
     }
     
     func updateMessageCell(by message: Message) {
+        let date = Date(timeIntervalSince1970: Double(message.created.seconds))
+        let formater = DateFormatter()
+        formater.timeStyle = .short
+        
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            formater.dateStyle = .none
+            dateLabel.text = formater.string(from: date)
+        } else {
+            formater.dateFormat = "dd MMMM"
+            dateLabel.text = formater.string(from: date)
+        }
         
         backgroundColor = themeManager?.backgroundColor
         bubbleView.layer.cornerRadius = 16
@@ -45,12 +58,14 @@ class MessageTableViewCell: UITableViewCell {
             textMessageLabel.textAlignment = .right
             senderName.text = "You"
             senderName.textAlignment = .right
+            dateLabel.textAlignment = .right
         } else {
             bubbleView.backgroundColor = themeManager?.inBabbleColor
             leadingConstraints?.isActive = true
             textMessageLabel.textAlignment = .left
             senderName.text = message.senderName
             senderName.textAlignment = .left
+            dateLabel.textAlignment = .left
         }
         
     }

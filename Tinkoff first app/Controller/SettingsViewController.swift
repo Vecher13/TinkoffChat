@@ -85,7 +85,7 @@ class SettingsViewController: UIViewController {
         print("night selected")
     }
     
-    func setupGestures(){
+    func setupGestures() {
         let classicViewGesture = UITapGestureRecognizer(target: self, action: #selector(classicTap(_:)))
         classicView.addGestureRecognizer(classicViewGesture)
         
@@ -105,7 +105,7 @@ class SettingsViewController: UIViewController {
         nigthLabel.addGestureRecognizer(nightLabelGesture)
         
     }
-    func reloadViews(){
+    func reloadViews() {
         view.backgroundColor = ThemesManager.shared.theme?.backgroundColor
         UITableViewHeaderFooterView.appearance().backgroundColor = .blue
         

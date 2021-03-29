@@ -35,6 +35,7 @@
 		5EE3287925D7FB4800BFB563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287725D7FB4800BFB563 /* Main.storyboard */; };
 		5EE3287B25D7FB4800BFB563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287A25D7FB4800BFB563 /* Assets.xcassets */; };
 		5EE3287E25D7FB4800BFB563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EE3287C25D7FB4800BFB563 /* LaunchScreen.storyboard */; };
+		5EE7EE792612609200B7BF20 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EE7EE772612609200B7BF20 /* Chat.xcdatamodeld */; };
 		5EF3704D2600A503008DD0EF /* HandelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF3704C2600A503008DD0EF /* HandelJSON.swift */; };
 		601EA38C78EBCB71703860A4 /* Pods_Tinkoff_first_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		5EE3287A25D7FB4800BFB563 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EE3287D25D7FB4800BFB563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EE3287F25D7FB4800BFB563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EE7EE782612609200B7BF20 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
 		5EF3704C2600A503008DD0EF /* HandelJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandelJSON.swift; sourceTree = "<group>"; };
 		729AE73D63ECBFDDBE5907DF /* Pods-Tinkoff first app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinkoff first app.debug.xcconfig"; path = "Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app.debug.xcconfig"; sourceTree = "<group>"; };
 		F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tinkoff_first_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,7 @@
 		5EE3287025D7FB4800BFB563 /* Tinkoff first app */ = {
 			isa = PBXGroup;
 			children = (
+				5EE7EE762612607600B7BF20 /* CoreData */,
 				5E8C303F25F55EBD0010BEA0 /* Model */,
 				5E8C303E25F55E7B0010BEA0 /* Controller */,
 				5E8C303D25F55E560010BEA0 /* View */,
@@ -174,6 +177,14 @@
 				5E05996426014A2D00992952 /* jsonData.json */,
 			);
 			path = "Tinkoff first app";
+			sourceTree = "<group>";
+		};
+		5EE7EE762612607600B7BF20 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5EE7EE772612609200B7BF20 /* Chat.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		C92DFD962D84B57AA5DAA1C9 /* Frameworks */ = {
@@ -332,6 +343,7 @@
 				5EA918C225F94A8B00EC9A66 /* CustomUIs.swift in Sources */,
 				5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */,
 				5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */,
+				5EE7EE792612609200B7BF20 /* Chat.xcdatamodeld in Sources */,
 				5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */,
 				5E88891D25F7FC5C00C97728 /* CustomThemVC.swift in Sources */,
 				5ED5C71C260A7BF600C97C0A /* FirebaseStructs.swift in Sources */,
@@ -547,6 +559,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5EE7EE772612609200B7BF20 /* Chat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5EE7EE782612609200B7BF20 /* Chat.xcdatamodel */,
+			);
+			currentVersion = 5EE7EE782612609200B7BF20 /* Chat.xcdatamodel */;
+			path = Chat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5EE3286625D7FB4700BFB563 /* Project object */;
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 class ChatViewController: UIViewController {
 
@@ -14,27 +15,39 @@ class ChatViewController: UIViewController {
     @IBOutlet var textMessageField: UITextField!
     @IBOutlet var sendButton: UIButton!
     
+    let coreDataStack = CoreDataStack()
+    
     var message: Message?
     var messagesList = [Message]()
+    var messageBd = [MessageBD]()
+    var channelBD: ChannelBD?
+    var channel: Channel?
     var documentID: String?
     var myName: String?
     lazy var db = Firestore.firestore()
     let myId = UIDevice.current.identifierForVendor!.uuidString
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         loadMyProfileData()
+      
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: testView.topAnchor).isActive = true
         tableView.separatorStyle = .none
-//        testView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         navigationItem.largeTitleDisplayMode = .never
        kB()
         hideKeyboardOnTapOnScren()
         tableView.delegate = self
+        
+        coreDataStack.didUpdateDataBase = { stack in
+                    stack.printDatabaseStatistice()
+                }
+        
+                coreDataStack.enableObservers()
         
         getMessage(documetnID: documentID)
     }
@@ -42,6 +55,7 @@ class ChatViewController: UIViewController {
     @IBAction func sendMessage(_ sender: Any) {
         if textMessageField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
         sendMessage(documentID: documentID)
+            print("Message was send")
         } else {
            print("need some text")
         }
@@ -98,37 +112,76 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ChatViewController {
     func getMessage(documetnID: String?) {
+         
         guard let iD = documentID else {return}
         
         let message = db.collection("channels").document(iD).collection("messages").order(by: "created")
-        message.addSnapshotListener { (documentSnapshot, error) in
+        message.addSnapshotListener { [self] (documentSnapshot, error) in
             self.messagesList = []
+//            self.coreDataStack.performSave { (context) in
+//                guard let channel = self.channel else {return}
+//                let cBD = ChannelBD(name: channel.name,
+//                       identifier: channel.identifier,
+//                       lastActivity: channel.lastActivity,
+//                       lastMessage: channel.lastMessage,
+//                       in: context)
+//
+//            }
+//
+//            var messagesBdArray: [MessageBD] = []
             if let error = error {
 //                self.alert()
                 print("Couldn't load message", error)
             } else {
                 documentSnapshot?.documents.forEach({ (document) in
+                    let identifier = document.documentID
                     if let content = document["content"] as? String,
                        let created = document["created"] as? Timestamp,
                        let senderId = document["senderId"] as? String,
                        let senderName = document["senderName"] as? String {
-                        let newMessage = Message(content: content, created: created, senderId: senderId, senderName: senderName)
+                        let newMessage = Message(content: content, created: created, senderId: senderId, senderName: senderName, identifire: identifier)
                         self.messagesList += [newMessage]
                         
+                        DispatchQueue.global().async {
+                           
+                        self.coreDataStack.performSave { (context) in
+                            let messageBD = MessageBD(content: content,
+                                                      created: created,
+                                                      identifier: identifier,
+                                                      senderId: senderId,
+                                                      senderName: senderName,
+                                                      in: context)
+                            
+                            guard let channel = self.channel else {return}
+                            let cBD = ChannelBD(name: channel.name,
+                                   identifier: channel.identifier,
+                                   lastActivity: channel.lastActivity,
+                                   lastMessage: channel.lastMessage,
+                                   in: context)
+                            cBD.addToMessageBD(messageBD)
+                           
+                    }
+                    }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                             self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
+                            
                         }
                     }
                     
                 }
                 )
             }
-            guard let document = documentSnapshot else {return}
-            for message in document.documents {
-            print("message: ", message.data())
-            }
+//            guard let document = documentSnapshot else {return}
+//            for message in document.documents {
+//            print("message: ", message.data())
+//
+//            }
+          
+//                self.sevaCoreData(data: self.messagesList)
+//            saveCD(data: self.messageBd)
         }
+        
     }
     
     func sendMessage(documentID: String?) {
@@ -145,7 +198,7 @@ extension ChatViewController {
                     print("Can't send the message", err)
                 } else {
                     self.textMessageField.text = ""
-                    
+                    print("success")
                 }
                 
             }

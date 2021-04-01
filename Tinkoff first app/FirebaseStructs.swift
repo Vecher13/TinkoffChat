@@ -20,4 +20,5 @@ let content: String
 let created: Timestamp
 let senderId: String
 let senderName: String
+    let identifire: String
 }

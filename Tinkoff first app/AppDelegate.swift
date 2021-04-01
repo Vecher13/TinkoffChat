@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private let theme12 = DarkThemeOld()
     private let theme13 = ThemesManager()
+    var coreDataStack = CoreDataStack()
     var window: UIWindow?
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -29,11 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-//        let db = Firestore.firestore()
-//        print(db)
+        
         logVC.showLog(function: #function, for: .app)
        
-//        print(#function)
         return true
     }
 

@@ -76,7 +76,7 @@
                                                     <color key="titleColor" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="sendMessage:" destination="Y9o-90-ODa" eventType="touchUpInside" id="lwC-vn-DjC"/>
+                                                    <action selector="sendMessage:" destination="Y9o-90-ODa" eventType="touchUpInside" id="xsv-Cq-Bbv"/>
                                                 </connections>
                                             </button>
                                         </subviews>

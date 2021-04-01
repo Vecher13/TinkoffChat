@@ -15,6 +15,10 @@ class ChatListViewController: UIViewController {
 
     let themeManager = ThemesManager.shared.theme
     
+    let coreDataStack = CoreDataStack()
+
+//    var channelBD = ChannelBD()
+
     lazy var db = Firestore.firestore()
     lazy var channels = db.collection("channels").order(by: "lastActivity", descending: true)
     
@@ -22,12 +26,16 @@ class ChatListViewController: UIViewController {
     let nameColor = ThemesManager.shared.theme?.labelTextColor
    
     var channelsList = [Channel]()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getChannelsList()
-       
+        coreDataStack.didUpdateDataBase = { stack in
+            stack.printDatabaseStatistice()
+        }
+        coreDataStack.enableObservers()
+      
         view.addSubview(tableView)
         barButton.image = #imageLiteral(resourceName: "UserImage")
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -100,13 +108,16 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+       
         let chat: Channel
         chat = channelsList[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
         secondVC.documentID = chat.identifier
         secondVC.title = chat.name
+//        secondVC.channelBD = channelBD
+        secondVC.channel = chat
+        
         show(secondVC, sender: nil)
 //        present(secondVC, animated: true, completion: nil)
         
@@ -126,25 +137,41 @@ extension ChatListViewController {
               
                 snapshot?.documents.forEach({ (document) in
                     let data = document.data()
-                    print(document.documentID)
-                    print(data)
+
                     if let identifier = document.documentID as String?,
                        let name1 = data["name"] as? String,
                        let lastMessage = data["lastMessage"] as? String?,
                        let lastActivity = data["lastActivity"] as? Timestamp? {
                         let newChannel = Channel(identifier: identifier, name: name1, lastMessage: lastMessage, lastActivity: lastActivity)
-//                        print("123", newChannel)
+
                         self.channelsList += [newChannel]
-//                        print("infolist", self.channelsList.count)
-                        
+                      
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
+                           
                         }
                     }
-                })
+                }
+                )
             }
+           
+            self.saveCoreData(data: self.channelsList)
         }
         
+    }
+    fileprivate func saveCoreData(data: [Channel]) {
+        data.forEach { (channel) in
+            DispatchQueue.global().async {
+                self.coreDataStack.performSave { (context) in
+                    _ = ChannelBD(name: channel.name,
+                                               identifier: channel.identifier,
+                                               lastActivity: channel.lastActivity,
+                                               lastMessage: channel.lastMessage,
+                                               in: context)
+                }
+            }
+            
+        }
     }
     
     func createChannel(name: String?) {

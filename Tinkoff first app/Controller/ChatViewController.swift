@@ -9,19 +9,19 @@ import UIKit
 import Firebase
 import CoreData
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var testView: UIView!
     @IBOutlet var textMessageField: UITextField!
     @IBOutlet var sendButton: UIButton!
     
     let coreDataStack = CoreDataStack()
-    
+    let modernCoreDataStack = ModernCoreDataStack()
     var message: Message?
     var messagesList = [Message]()
     var messageBd = [MessageBD]()
     var channelBD: ChannelBD?
-    var channel: Channel?
+    var channel: ChannelBD?
     var documentID: String?
     var myName: String?
     lazy var db = Firestore.firestore()
@@ -50,6 +50,61 @@ class ChatViewController: UIViewController {
                 coreDataStack.enableObservers()
         
         getMessage(documetnID: documentID)
+    }
+    
+    lazy var fetchDataFormDB: NSFetchedResultsController<MessageBD> = {
+        let request: NSFetchRequest<MessageBD> = MessageBD.fetchRequest()
+        var context = modernCoreDataStack.container.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        let sortDescriptor = NSSortDescriptor(key: "created", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        request.predicate = NSPredicate(format: "identifier == %@", "\(String(describing: documentID))")
+        
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: modernCoreDataStack.container.viewContext,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            print(error)
+        }
+        
+        return frc
+    }()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else {return}
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .move:
+            guard let newIndexPath = newIndexPath else {return}
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+        guard let indexPath = indexPath else {return}
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
     }
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -88,23 +143,30 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return messagesList.count
+        guard let section = fetchDataFormDB.fetchedObjects else { return 0 }
+        return section.count
+//        return messagesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        message = self.messagesList[indexPath.row]
+        let messageBD = fetchDataFormDB.object(at: indexPath)
+        
+//        message = self.messagesList[indexPath.row]
     
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else { return UITableViewCell() }
-        if let message = message {
-            cell.updateMessageCell(by: message)
-//            cell.textMessageLabel.text = message.message
         
+        cell.updateMessageCell(by: messageBD)
+        
+//        cell.textMessageLabel.text = messageBD.content
+        
+//        if let message = message {
+//            cell.updateMessageCell(by: message)
+//            cell.textMessageLabel.text = message.message
+//
 //        cell.contentView.backgroundColor = Theme.backgroundColor
-        } else {
-            print("Error send message to cell")
-        }
+//        } else {
+//            print("Error send message to cell")
+//        }
         return cell
     }
     
@@ -142,29 +204,10 @@ extension ChatViewController {
                         let newMessage = Message(content: content, created: created, senderId: senderId, senderName: senderName, identifire: identifier)
                         self.messagesList += [newMessage]
                         
-                        DispatchQueue.global().async {
-                           
-                        self.coreDataStack.performSave { (context) in
-                            let messageBD = MessageBD(content: content,
-                                                      created: created,
-                                                      identifier: identifier,
-                                                      senderId: senderId,
-                                                      senderName: senderName,
-                                                      in: context)
-                            
-                            guard let channel = self.channel else {return}
-                            let cBD = ChannelBD(name: channel.name,
-                                   identifier: channel.identifier,
-                                   lastActivity: channel.lastActivity,
-                                   lastMessage: channel.lastMessage,
-                                   in: context)
-                            cBD.addToMessageBD(messageBD)
-                           
-                    }
-                    }
+//                       
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
-                            self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
+//                            self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
                             
                         }
                     }
@@ -172,6 +215,7 @@ extension ChatViewController {
                 }
                 )
             }
+            saveCoreData(data: self.messagesList)
 //            guard let document = documentSnapshot else {return}
 //            for message in document.documents {
 //            print("message: ", message.data())
@@ -182,6 +226,44 @@ extension ChatViewController {
 //            saveCD(data: self.messageBd)
         }
         
+    }
+    
+    func saveCoreData(data: [Message]) {
+        data.forEach { (message) in
+            _ = modernCoreDataStack.container.newBackgroundContext()
+            let context = self.modernCoreDataStack.container.viewContext
+                let messageBD = MessageBD(content: message.content,
+                                          created: message.created,
+                                          identifier: message.identifire,
+                                          senderId: message.identifire,
+                                          senderName: message.senderName,
+                                          in: context)
+                
+//                guard let channel = self.channel else {return}
+
+                let request: NSFetchRequest<ChannelBD> = ChannelBD.fetchRequest()
+                request.predicate = NSPredicate(format: "identifier == %@", "\(String(describing: self.documentID))")
+                var result: [ChannelBD] = []
+                
+                do {
+                    result = try  context.fetch(request)
+                } catch {
+                    print(error)
+                }
+            guard let fetchedChannel = result.first else {return}
+            fetchedChannel.addToMessageBD(messageBD)
+            
+                do {
+                    context.automaticallyMergesChangesFromParent = true
+                    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                    try context.save()
+                    
+                  } catch {
+                    // handle error
+                    print(error)
+                  }
+            
+        }
     }
     
     func sendMessage(documentID: String?) {

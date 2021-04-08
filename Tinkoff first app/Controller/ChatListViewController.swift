@@ -7,8 +7,9 @@
 
 import UIKit
 import Firebase
+import CoreData
 
-class ChatListViewController: UIViewController {
+class ChatListViewController: UIViewController, NSFetchedResultsControllerDelegate {
    
     @IBOutlet var barButton: UIBarButtonItem!
     @IBOutlet var addChannelButton: UIBarButtonItem!
@@ -16,6 +17,7 @@ class ChatListViewController: UIViewController {
     let themeManager = ThemesManager.shared.theme
     
     let coreDataStack = CoreDataStack()
+    let modernCoreDataStack = ModernCoreDataStack()
 
 //    var channelBD = ChannelBD()
 
@@ -24,17 +26,16 @@ class ChatListViewController: UIViewController {
     
     let cellColor = ThemesManager.shared.theme?.subLabelTextColor
     let nameColor = ThemesManager.shared.theme?.labelTextColor
-   
     var channelsList = [Channel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getChannelsList()
-        coreDataStack.didUpdateDataBase = { stack in
-            stack.printDatabaseStatistice()
-        }
-        coreDataStack.enableObservers()
+//        coreDataStack.didUpdateDataBase = { stack in
+//            stack.printDatabaseStatistice()
+//        }
+//        coreDataStack.enableObservers()
       
         view.addSubview(tableView)
         barButton.image = #imageLiteral(resourceName: "UserImage")
@@ -47,7 +48,6 @@ class ChatListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = themeManager?.backgroundColor
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +58,60 @@ class ChatListViewController: UIViewController {
     
     @IBAction func addChannel(_ sender: Any) {
         addChannel()
+    }
+    
+    lazy var fetchDataFormDB: NSFetchedResultsController<ChannelBD> = {
+        let request: NSFetchRequest<ChannelBD> = ChannelBD.fetchRequest()
+        var context = modernCoreDataStack.container.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        let sortDescriptor = NSSortDescriptor(key: "lastActivity", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
+        let frc = NSFetchedResultsController(fetchRequest: request,
+                                             managedObjectContext: modernCoreDataStack.container.viewContext,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            print(error)
+        }
+        
+        return frc
+    }()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else {return}
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .move:
+            guard let newIndexPath = newIndexPath else {return}
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+        guard let indexPath = indexPath else {return}
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            print(Error.self)
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
     }
 
     private let cellIdentifier = String(describing: CustoTableViewCell.self)
@@ -75,6 +129,18 @@ class ChatListViewController: UIViewController {
 
 extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let chatBD = fetchDataFormDB.object(at: indexPath)
+        if editingStyle == .delete {
+            guard let id = chatBD.identifier else {return}
+            db.collection("channels").document(id).delete { err in
+                if let err = err { print(err)} else {
+                    print("Deleted")
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
@@ -84,20 +150,29 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channelsList.count
+        guard let section = fetchDataFormDB.fetchedObjects else {return 0 }
+        
+//        return channelsList.count
+        print("number of channels!", section.count)
+        return section.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        var chat: Channel?
-       chat = channelsList[indexPath.row]
+        let chatBD = fetchDataFormDB.object(at: indexPath)
+        
+//        var chat: Channel?
+//       chat = channelsList[indexPath.row]
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustoTableViewCell else {return UITableViewCell()}
-        if let chat = chat {
-        cell.configure(with: chat)
+//        if let chat = chat {
+//        cell.configure(with: chat)
+//        cell.settingsForCell()
+//        }
         
-        cell.settingsForCell()
-        }
+            cell.nameLabel.text = "\(chatBD.name ?? "")"
+        cell.messageLabel.text = chatBD.lastMessage ?? ""
+        cell.timeLabel.text = "\(String(describing: chatBD.lastActivity?.timeIntervalSinceReferenceDate))"
+//        print("Name channel", chatBD.name)
         let themeManager = ThemesManager.shared.theme
         cell.nameLabel.textColor = themeManager?.labelTextColor
         cell.messageLabel.textColor = themeManager?.subLabelTextColor
@@ -108,15 +183,16 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        let chat: Channel
-        chat = channelsList[indexPath.row]
+        let chatBD = fetchDataFormDB.object(at: indexPath)
+        
+//        let chat: Channel
+//        chat = channelsList[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
-        secondVC.documentID = chat.identifier
-        secondVC.title = chat.name
+        secondVC.documentID = chatBD.identifier
+        secondVC.title = chatBD.name
 //        secondVC.channelBD = channelBD
-        secondVC.channel = chat
+        secondVC.channel = chatBD
         
         show(secondVC, sender: nil)
 //        present(secondVC, animated: true, completion: nil)
@@ -137,15 +213,15 @@ extension ChatListViewController {
               
                 snapshot?.documents.forEach({ (document) in
                     let data = document.data()
-
+                    
                     if let identifier = document.documentID as String?,
                        let name1 = data["name"] as? String,
                        let lastMessage = data["lastMessage"] as? String?,
                        let lastActivity = data["lastActivity"] as? Timestamp? {
-                        let newChannel = Channel(identifier: identifier, name: name1, lastMessage: lastMessage, lastActivity: lastActivity)
+                        let newChannel = Channel(identifier: identifier, name: name1, lastMessage: lastMessage, lastActivity: lastActivity, document: document)
 
                         self.channelsList += [newChannel]
-                      
+                        
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                            
@@ -155,21 +231,69 @@ extension ChatListViewController {
                 )
             }
            
+            guard let snapshot = snapshot else {return}
+            snapshot.documentChanges.forEach { diff in
+                              if diff.type == .added {
+                                  print("New channel!: \(diff.document.data())")
+                              }
+                              if diff.type == .modified {
+                                  print("Modified channel: \(diff.document.data())")
+                              }
+                              if diff.type == .removed {
+                                let request: NSFetchRequest<ChannelBD> = ChannelBD.fetchRequest()
+                                
+                                request.predicate = NSPredicate(format: "identifier == %@", "\(diff.document.documentID)")
+                                var result: [ChannelBD] = []
+                                let context = self.modernCoreDataStack.container.viewContext
+                                do {
+                                    result = try  context.fetch(request)
+                                } catch {
+                                    print(error)
+                                }
+//                                result.forEach {
+//                                    print("cupched", $0.identifier)
+//                                }
+                                context.delete(result[0])
+                                self.modernCoreDataStack.saveContext()
+                                print("Removed channel: \(diff.document.documentID)")
+                              }
+                          }
+        
+            print("count channels: ", self.channelsList.count)
             self.saveCoreData(data: self.channelsList)
         }
         
     }
     fileprivate func saveCoreData(data: [Channel]) {
         data.forEach { (channel) in
-            DispatchQueue.global().async {
-                self.coreDataStack.performSave { (context) in
-                    _ = ChannelBD(name: channel.name,
-                                               identifier: channel.identifier,
-                                               lastActivity: channel.lastActivity,
-                                               lastMessage: channel.lastMessage,
-                                               in: context)
-                }
+            
+            self.modernCoreDataStack.container.performBackgroundTask { context in
+                _ = ChannelBD(name: channel.name,
+                                           identifier: channel.identifier,
+                                           lastActivity: channel.lastActivity,
+                                           lastMessage: channel.lastMessage,
+                                           in: context)
+                
+                do {
+                    context.automaticallyMergesChangesFromParent = true
+                    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                    try context.save()
+                  } catch {
+                    // handle error
+                    print(error)
+                  }
+//                self.modernCoreDataStack.saveContext()
             }
+            
+//            DispatchQueue.global().async {
+//                self.coreDataStack.performSave { (context) in
+//                    _ = ChannelBD(name: channel.name,
+//                                               identifier: channel.identifier,
+//                                               lastActivity: channel.lastActivity,
+//                                               lastMessage: channel.lastMessage,
+//                                               in: context)
+//                }
+//            }
             
         }
     }

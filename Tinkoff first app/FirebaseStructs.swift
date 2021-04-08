@@ -13,6 +13,7 @@ let identifier: String
 let name: String
 let lastMessage: String?
 let lastActivity: Timestamp?
+    let document: QueryDocumentSnapshot
 }
 
 struct Message {

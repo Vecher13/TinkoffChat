@@ -7,6 +7,48 @@
 
 import Foundation
 import CoreData
+import UIKit
+
+class ModernCoreDataStack {
+    private let dataBaseName = "Chat"
+   
+    lazy var container: NSPersistentContainer = {
+       
+        let container = NSPersistentContainer(name: dataBaseName)
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("something went wrong \(error) \(error.userInfo)")
+            }
+        }
+        return container
+        
+    }()
+//    lazy var mainContext: NSManagedObjectContext = {
+//        self.container.viewContext.automaticallyMergesChangesFromParent = true
+//        return self.container.viewContext
+//    }
+    func saveContext() {
+       
+        let context: NSManagedObjectContext = {
+            return container.viewContext
+          }()
+        context.automaticallyMergesChangesFromParent = true
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        if context.hasChanges {
+            do {
+                try context.save()
+                
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+    
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+
+}
 
 class CoreDataStack {
     var didUpdateDataBase: ((CoreDataStack) -> Void)?

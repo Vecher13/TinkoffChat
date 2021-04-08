@@ -26,7 +26,7 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="ChannelBD" positionX="-388.217529296875" positionY="151.9075164794922" width="128" height="28"/>
+        <element name="ChannelBD" positionX="-388.217529296875" positionY="151.9075164794922" width="128" height="104"/>
         <element name="MessageBD" positionX="-126.803955078125" positionY="421.5828552246094" width="128" height="28"/>
     </elements>
 </model>

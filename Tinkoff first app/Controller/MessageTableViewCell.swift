@@ -32,8 +32,8 @@ class MessageTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func updateMessageCell(by message: Message) {
-        let date = Date(timeIntervalSince1970: Double(message.created.seconds))
+    func updateMessageCell(by message: MessageBD) {
+        let date = Date(timeIntervalSince1970: Double(message.created?.timeIntervalSince1970 ?? 1))
         let formater = DateFormatter()
         formater.timeStyle = .short
         

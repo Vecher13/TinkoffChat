@@ -30,10 +30,10 @@ class CustoTableViewCell: UITableViewCell {
         //        avatarImage.image = nil
     }
     
-    func configure(with model: Channel) {
-        guard let givenDate = model.lastActivity?.seconds else {return}
+    func configure(with model: ChannelBD) {
+        guard let givenDate = model.lastActivity else {return}
         
-        let date = Date(timeIntervalSince1970: Double(givenDate))
+        let date = givenDate
         let formater = DateFormatter()
         formater.timeStyle = .short
         

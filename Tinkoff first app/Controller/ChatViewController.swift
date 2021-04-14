@@ -22,7 +22,7 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
     var messageBd = [MessageBD]()
     var channelBD: ChannelBD?
     var channel: ChannelBD?
-    var documentID: String?
+    var documentID: String = ""
     var myName: String?
     lazy var db = Firestore.firestore()
     let myId = UIDevice.current.identifierForVendor!.uuidString
@@ -52,16 +52,19 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
         getMessage(documetnID: documentID)
     }
     
-    lazy var fetchDataFormDB: NSFetchedResultsController<MessageBD> = {
+    lazy var fetchMessagesFormDB: NSFetchedResultsController<MessageBD> = {
+       
         let request: NSFetchRequest<MessageBD> = MessageBD.fetchRequest()
         var context = modernCoreDataStack.container.viewContext
         context.automaticallyMergesChangesFromParent = true
         let sortDescriptor = NSSortDescriptor(key: "created", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        request.predicate = NSPredicate(format: "identifier == %@", "\(String(describing: documentID))")
+        request.fetchBatchSize = 20
         
+        request.predicate = NSPredicate(format: "channelBD.identifier=%@", documentID)
+      
         let frc = NSFetchedResultsController(fetchRequest: request,
-                                             managedObjectContext: modernCoreDataStack.container.viewContext,
+                                             managedObjectContext: context,
                                              sectionNameKeyPath: nil,
                                              cacheName: nil)
         frc.delegate = self
@@ -83,6 +86,11 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
         case .insert:
             guard let newIndexPath = newIndexPath else {return}
             tableView.insertRows(at: [newIndexPath], with: .automatic)
+            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
+                
+            }
         case .move:
             guard let newIndexPath = newIndexPath else {return}
             guard let indexPath = indexPath else {return}
@@ -143,20 +151,21 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = fetchDataFormDB.fetchedObjects else { return 0 }
+        guard let section = fetchMessagesFormDB.fetchedObjects else { return 0 }
+        print("Section count:", section.count)
         return section.count
 //        return messagesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageBD = fetchDataFormDB.object(at: indexPath)
+        let messageBD = fetchMessagesFormDB.object(at: indexPath)
         
 //        message = self.messagesList[indexPath.row]
     
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else { return UITableViewCell() }
         
         cell.updateMessageCell(by: messageBD)
-        
+       
 //        cell.textMessageLabel.text = messageBD.content
         
 //        if let message = message {
@@ -175,24 +184,14 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
 extension ChatViewController {
     func getMessage(documetnID: String?) {
          
-        guard let iD = documentID else {return}
+//        guard let iD = documentID else {return}
+        let iD = documentID
         
         let message = db.collection("channels").document(iD).collection("messages").order(by: "created")
         message.addSnapshotListener { [self] (documentSnapshot, error) in
             self.messagesList = []
-//            self.coreDataStack.performSave { (context) in
-//                guard let channel = self.channel else {return}
-//                let cBD = ChannelBD(name: channel.name,
-//                       identifier: channel.identifier,
-//                       lastActivity: channel.lastActivity,
-//                       lastMessage: channel.lastMessage,
-//                       in: context)
-//
-//            }
-//
-//            var messagesBdArray: [MessageBD] = []
             if let error = error {
-//                self.alert()
+
                 print("Couldn't load message", error)
             } else {
                 documentSnapshot?.documents.forEach({ (document) in
@@ -205,48 +204,45 @@ extension ChatViewController {
                         self.messagesList += [newMessage]
                         
 //                       
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
+//                        DispatchQueue.main.async {
+//                            self.tableView.reloadData()
 //                            self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
-                            
-                        }
+//
+//                        }
                     }
                     
                 }
                 )
             }
-            saveCoreData(data: self.messagesList)
-//            guard let document = documentSnapshot else {return}
-//            for message in document.documents {
-//            print("message: ", message.data())
-//
-//            }
-          
-//                self.sevaCoreData(data: self.messagesList)
-//            saveCD(data: self.messageBd)
+            print("Count form FB:", documentSnapshot?.documents.count)
+            saveCoreData(data: self.messagesList, idDocument: self.documentID)
         }
         
     }
     
-    func saveCoreData(data: [Message]) {
+    func saveCoreData(data: [Message], idDocument: String?) {
         data.forEach { (message) in
             _ = modernCoreDataStack.container.newBackgroundContext()
             let context = self.modernCoreDataStack.container.viewContext
                 let messageBD = MessageBD(content: message.content,
                                           created: message.created,
                                           identifier: message.identifire,
-                                          senderId: message.identifire,
+                                          senderId: message.senderId,
                                           senderName: message.senderName,
                                           in: context)
-                
-//                guard let channel = self.channel else {return}
-
+            
                 let request: NSFetchRequest<ChannelBD> = ChannelBD.fetchRequest()
-                request.predicate = NSPredicate(format: "identifier == %@", "\(String(describing: self.documentID))")
+            guard let id = idDocument else {return
+                print("ERROR ID")
+            }
+      
+                request.predicate = NSPredicate(format: "identifier=%@", id)
+            
                 var result: [ChannelBD] = []
                 
                 do {
                     result = try  context.fetch(request)
+                    print(result.first?.messageBD?.count)
                 } catch {
                     print(error)
                 }

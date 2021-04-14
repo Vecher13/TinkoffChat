@@ -18,7 +18,7 @@ extension ChannelBD {
         self.init(context: context)
         self.name = name
         self.identifier = identifier
-        self.lastActivity = Date()
+        self.lastActivity = lastActivity?.dateValue()
         self.lastMessage = lastMessage
     }
 //    var about: String {

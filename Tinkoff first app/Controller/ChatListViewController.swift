@@ -32,10 +32,6 @@ class ChatListViewController: UIViewController, NSFetchedResultsControllerDelega
         super.viewDidLoad()
         
         getChannelsList()
-//        coreDataStack.didUpdateDataBase = { stack in
-//            stack.printDatabaseStatistice()
-//        }
-//        coreDataStack.enableObservers()
       
         view.addSubview(tableView)
         barButton.image = #imageLiteral(resourceName: "UserImage")
@@ -64,7 +60,7 @@ class ChatListViewController: UIViewController, NSFetchedResultsControllerDelega
         let request: NSFetchRequest<ChannelBD> = ChannelBD.fetchRequest()
         var context = modernCoreDataStack.container.viewContext
         context.automaticallyMergesChangesFromParent = true
-        let sortDescriptor = NSSortDescriptor(key: "lastActivity", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "lastActivity", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         
         let frc = NSFetchedResultsController(fetchRequest: request,
@@ -168,11 +164,8 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
 //        cell.configure(with: chat)
 //        cell.settingsForCell()
 //        }
-        
-            cell.nameLabel.text = "\(chatBD.name ?? "")"
-        cell.messageLabel.text = chatBD.lastMessage ?? ""
-        cell.timeLabel.text = "\(String(describing: chatBD.lastActivity?.timeIntervalSinceReferenceDate))"
-//        print("Name channel", chatBD.name)
+        cell.configure(with: chatBD)
+
         let themeManager = ThemesManager.shared.theme
         cell.nameLabel.textColor = themeManager?.labelTextColor
         cell.messageLabel.textColor = themeManager?.subLabelTextColor
@@ -189,7 +182,8 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
 //        chat = channelsList[indexPath.row]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
-        secondVC.documentID = chatBD.identifier
+        guard let id = chatBD.identifier else {return}
+        secondVC.documentID = id
         secondVC.title = chatBD.name
 //        secondVC.channelBD = channelBD
         secondVC.channel = chatBD
@@ -282,18 +276,7 @@ extension ChatListViewController {
                     // handle error
                     print(error)
                   }
-//                self.modernCoreDataStack.saveContext()
             }
-            
-//            DispatchQueue.global().async {
-//                self.coreDataStack.performSave { (context) in
-//                    _ = ChannelBD(name: channel.name,
-//                                               identifier: channel.identifier,
-//                                               lastActivity: channel.lastActivity,
-//                                               lastMessage: channel.lastMessage,
-//                                               in: context)
-//                }
-//            }
             
         }
     }

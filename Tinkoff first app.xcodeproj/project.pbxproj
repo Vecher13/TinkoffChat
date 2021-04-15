@@ -19,7 +19,6 @@
 		5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */; };
 		5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */; };
 		5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80C15C25F17C3E00B75A0E /* DataModel.swift */; };
-		5E88891D25F7FC5C00C97728 /* CustomThemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E88891C25F7FC5C00C97728 /* CustomThemVC.swift */; };
 		5E88892025F80DD200C97728 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E88891F25F80DD200C97728 /* CustomView.swift */; };
 		5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A225F03BCA00703A61 /* ChatViewController.swift */; };
 		5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */; };
@@ -31,6 +30,7 @@
 		5EA918C525F953DB00EC9A66 /* With.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA918C425F953DB00EC9A66 /* With.swift */; };
 		5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB77AD25D93BBE00D0DE14 /* LogController.swift */; };
 		5ED5C71C260A7BF600C97C0A /* FirebaseStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED5C71B260A7BF600C97C0A /* FirebaseStructs.swift */; };
+		5ED7F75126278918008FFF60 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F75026278918008FFF60 /* FirebaseService.swift */; };
 		5EE3287225D7FB4800BFB563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287125D7FB4800BFB563 /* AppDelegate.swift */; };
 		5EE3287425D7FB4800BFB563 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287325D7FB4800BFB563 /* SceneDelegate.swift */; };
 		5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3287525D7FB4800BFB563 /* ViewController.swift */; };
@@ -56,7 +56,6 @@
 		5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustoTableViewCell.xib; sourceTree = "<group>"; };
 		5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		5E80C15C25F17C3E00B75A0E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		5E88891C25F7FC5C00C97728 /* CustomThemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomThemVC.swift; sourceTree = "<group>"; };
 		5E88891F25F80DD200C97728 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		5E8961A225F03BCA00703A61 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		5EA918C425F953DB00EC9A66 /* With.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = With.swift; sourceTree = "<group>"; };
 		5EAB77AD25D93BBE00D0DE14 /* LogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		5ED5C71B260A7BF600C97C0A /* FirebaseStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStructs.swift; sourceTree = "<group>"; };
+		5ED7F75026278918008FFF60 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		5EE3286E25D7FB4800BFB563 /* Tinkoff first app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tinkoff first app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE3287125D7FB4800BFB563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EE3287325D7FB4800BFB563 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,9 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				5EE3287725D7FB4800BFB563 /* Main.storyboard */,
-				5E88891C25F7FC5C00C97728 /* CustomThemVC.swift */,
 				5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */,
-				5E88891F25F80DD200C97728 /* CustomView.swift */,
 				5E8961A625F03C0300703A61 /* MessageTableViewCell.xib */,
 			);
 			name = View;
@@ -122,10 +120,9 @@
 				5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */,
 				5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */,
 				5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */,
-				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
 				5EE3287525D7FB4800BFB563 /* ViewController.swift */,
 				5EA5F83825E2DB1F00574629 /* ProfileViewController.swift */,
-				5EA451AE25F7CFB400DDE495 /* SettingsViewController.swift */,
+				5E88891F25F80DD200C97728 /* CustomView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -136,12 +133,8 @@
 				5E80C15C25F17C3E00B75A0E /* DataModel.swift */,
 				5EA451B225F7E6E900DDE495 /* ThemesModel.swift */,
 				5EA918C125F94A8B00EC9A66 /* CustomUIs.swift */,
-				5EA918C425F953DB00EC9A66 /* With.swift */,
-				5E0599672602935B00992952 /* GCDUploader.swift */,
-				5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */,
-				5EF3704C2600A503008DD0EF /* HandelJSON.swift */,
-				5E05996B2602B3A600992952 /* Options.swift */,
 				5ED5C71B260A7BF600C97C0A /* FirebaseStructs.swift */,
+				5EA918C425F953DB00EC9A66 /* With.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -168,6 +161,8 @@
 		5EE3287025D7FB4800BFB563 /* Tinkoff first app */ = {
 			isa = PBXGroup;
 			children = (
+				5EF9DB7B2628F1A100395DE1 /* Core Layer */,
+				5EF9DB7A2628F18300395DE1 /* Service Layer */,
 				5EE7EE762612607600B7BF20 /* CoreData */,
 				5E8C303F25F55EBD0010BEA0 /* Model */,
 				5E8C303E25F55E7B0010BEA0 /* Controller */,
@@ -187,10 +182,31 @@
 			isa = PBXGroup;
 			children = (
 				5EE7EE772612609200B7BF20 /* Chat.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5EF9DB7A2628F18300395DE1 /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+				5EF3704C2600A503008DD0EF /* HandelJSON.swift */,
+				5E0599672602935B00992952 /* GCDUploader.swift */,
+				5E05996B2602B3A600992952 /* Options.swift */,
+				5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */,
+				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
+				5ED7F75026278918008FFF60 /* FirebaseService.swift */,
+				5EA451AE25F7CFB400DDE495 /* SettingsViewController.swift */,
+			);
+			name = "Service Layer";
+			sourceTree = "<group>";
+		};
+		5EF9DB7B2628F1A100395DE1 /* Core Layer */ = {
+			isa = PBXGroup;
+			children = (
 				5E75E49226132420000A1092 /* CoreDataStack.swift */,
 				5E75E49626138F04000A1092 /* ObjectsExtensions.swift */,
 			);
-			path = CoreData;
+			path = "Core Layer";
 			sourceTree = "<group>";
 		};
 		C92DFD962D84B57AA5DAA1C9 /* Frameworks */ = {
@@ -352,8 +368,8 @@
 				5EE3287625D7FB4800BFB563 /* ViewController.swift in Sources */,
 				5EE7EE792612609200B7BF20 /* Chat.xcdatamodeld in Sources */,
 				5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */,
-				5E88891D25F7FC5C00C97728 /* CustomThemVC.swift in Sources */,
 				5ED5C71C260A7BF600C97C0A /* FirebaseStructs.swift in Sources */,
+				5ED7F75126278918008FFF60 /* FirebaseService.swift in Sources */,
 				5E05996C2602B3A600992952 /* Options.swift in Sources */,
 				5EA5F83925E2DB1F00574629 /* ProfileViewController.swift in Sources */,
 				5E0599B426040FEA00992952 /* CommonsThreadSettings.swift in Sources */,

@@ -31,14 +31,8 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewDidLoad()
         view.addSubview(tableView)
         loadMyProfileData()
-      
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: testView.topAnchor).isActive = true
-        tableView.separatorStyle = .none
-        navigationItem.largeTitleDisplayMode = .never
+      setupView()
+        
        kB()
         hideKeyboardOnTapOnScren()
         tableView.delegate = self
@@ -50,6 +44,15 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
                 coreDataStack.enableObservers()
         
         getMessage(documetnID: documentID)
+    }
+    
+    @IBAction func sendMessage(_ sender: Any) {
+        if textMessageField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
+        sendMessage(documentID: documentID)
+            print("Message was send")
+        } else {
+           print("need some text")
+        }
     }
     
     lazy var fetchMessagesFormDB: NSFetchedResultsController<MessageBD> = {
@@ -76,53 +79,6 @@ class ChatViewController: UIViewController, NSFetchedResultsControllerDelegate {
         
         return frc
     }()
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any,
-                    at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            guard let newIndexPath = newIndexPath else {return}
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
-                
-            }
-        case .move:
-            guard let newIndexPath = newIndexPath else {return}
-            guard let indexPath = indexPath else {return}
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-        case .update:
-        guard let indexPath = indexPath else {return}
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-        case .delete:
-            guard let indexPath = indexPath else {return}
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        @unknown default:
-            fatalError()
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.endUpdates()
-    }
-    
-    @IBAction func sendMessage(_ sender: Any) {
-        if textMessageField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
-        sendMessage(documentID: documentID)
-            print("Message was send")
-        } else {
-           print("need some text")
-        }
-    }
     
     private let cellIdentifier = String(describing: MessageTableViewCell.self)
     private lazy var tableView: UITableView = {
@@ -165,17 +121,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MessageTableViewCell else { return UITableViewCell() }
         
         cell.updateMessageCell(by: messageBD)
-       
-//        cell.textMessageLabel.text = messageBD.content
-        
-//        if let message = message {
-//            cell.updateMessageCell(by: message)
-//            cell.textMessageLabel.text = message.message
-//
-//        cell.contentView.backgroundColor = Theme.backgroundColor
-//        } else {
-//            print("Error send message to cell")
-//        }
+
         return cell
     }
     
@@ -203,18 +149,12 @@ extension ChatViewController {
                         let newMessage = Message(content: content, created: created, senderId: senderId, senderName: senderName, identifire: identifier)
                         self.messagesList += [newMessage]
                         
-//                       
-//                        DispatchQueue.main.async {
-//                            self.tableView.reloadData()
-//                            self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
-//
-//                        }
                     }
                     
                 }
                 )
             }
-            print("Count form FB:", documentSnapshot?.documents.count)
+            
             saveCoreData(data: self.messagesList, idDocument: self.documentID)
         }
         
@@ -242,7 +182,7 @@ extension ChatViewController {
                 
                 do {
                     result = try  context.fetch(request)
-                    print(result.first?.messageBD?.count)
+                  
                 } catch {
                     print(error)
                 }
@@ -310,9 +250,9 @@ extension ChatViewController {
     
 }
 
+// MARK: - keyboard control
+
 extension ChatViewController {
-    
-    // MARK: - keyboard control
     
     func kB() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -353,4 +293,62 @@ extension ChatViewController {
         view.endEditing(true)
     }
     
+}
+
+// MARK: - View layout settings
+
+extension ChatViewController {
+    
+    fileprivate func setupView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: testView.topAnchor).isActive = true
+        tableView.separatorStyle = .none
+        navigationItem.largeTitleDisplayMode = .never
+    }
+}
+
+// MARK: - FRC
+
+extension ChatViewController {
+  
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else {return}
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: [0, self.messagesList.count - 1], at: .bottom, animated: false)
+                
+            }
+        case .move:
+            guard let newIndexPath = newIndexPath else {return}
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .update:
+        guard let indexPath = indexPath else {return}
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else {return}
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
+    }
 }

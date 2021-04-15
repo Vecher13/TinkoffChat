@@ -21,9 +21,7 @@ class CustoTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
-        //        nameLabel.textColor = themeManager?.labelTextColor
-        //        messageLabel.textColor = themeManager?.subLabelTextColor
-        //        timeLabel.textColor = themeManager?.subLabelTextColor
+        
         nameLabel.text = nil
         messageLabel.text = nil
         timeLabel.text = nil

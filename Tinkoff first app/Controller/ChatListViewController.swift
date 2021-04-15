@@ -27,32 +27,22 @@ class ChatListViewController: UIViewController, NSFetchedResultsControllerDelega
     let cellColor = ThemesManager.shared.theme?.subLabelTextColor
     let nameColor = ThemesManager.shared.theme?.labelTextColor
     var channelsList = [Channel]()
-    
+//    let fireBaseService = FirebaseService.share
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        fireBaseService.getChannelsList()
         getChannelsList()
-      
-        view.addSubview(tableView)
-        barButton.image = #imageLiteral(resourceName: "UserImage")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = themeManager?.backgroundColor
+      setupVuew()
+       
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         view.reloadInputViews()
     }
-    
+   
     @IBAction func addChannel(_ sender: Any) {
+//        fireBaseService.addChannel()
         addChannel()
     }
     
@@ -148,24 +138,16 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = fetchDataFormDB.fetchedObjects else {return 0 }
         
-//        return channelsList.count
         print("number of channels!", section.count)
         return section.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let chatBD = fetchDataFormDB.object(at: indexPath)
-        
-//        var chat: Channel?
-//       chat = channelsList[indexPath.row]
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustoTableViewCell else {return UITableViewCell()}
-//        if let chat = chat {
-//        cell.configure(with: chat)
-//        cell.settingsForCell()
-//        }
-        cell.configure(with: chatBD)
 
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustoTableViewCell else {return UITableViewCell()}
+
+        cell.configure(with: chatBD)
         let themeManager = ThemesManager.shared.theme
         cell.nameLabel.textColor = themeManager?.labelTextColor
         cell.messageLabel.textColor = themeManager?.subLabelTextColor
@@ -177,23 +159,20 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatBD = fetchDataFormDB.object(at: indexPath)
-        
-//        let chat: Channel
-//        chat = channelsList[indexPath.row]
+ 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let secondVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController else { return }
         guard let id = chatBD.identifier else {return}
         secondVC.documentID = id
         secondVC.title = chatBD.name
-//        secondVC.channelBD = channelBD
         secondVC.channel = chatBD
         
         show(secondVC, sender: nil)
-//        present(secondVC, animated: true, completion: nil)
-        
     }
     
 }
+
+// MARK: - FireBase
 
 extension ChatListViewController {
     
@@ -244,9 +223,7 @@ extension ChatListViewController {
                                 } catch {
                                     print(error)
                                 }
-//                                result.forEach {
-//                                    print("cupched", $0.identifier)
-//                                }
+//
                                 context.delete(result[0])
                                 self.modernCoreDataStack.saveContext()
                                 print("Removed channel: \(diff.document.documentID)")
@@ -324,5 +301,23 @@ extension ChatListViewController {
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
+    }
+}
+
+// MARK: - View Layout Settings
+
+extension ChatListViewController {
+    fileprivate func setupVuew() {
+        view.addSubview(tableView)
+        barButton.image = #imageLiteral(resourceName: "UserImage")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = themeManager?.backgroundColor
     }
 }

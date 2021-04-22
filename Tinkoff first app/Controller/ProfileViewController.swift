@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, DidUpdatePhoto {
+    
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var nameLabel: UITextField!
@@ -22,13 +23,15 @@ class ProfileViewController: UIViewController {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     let jsonManager = SaveDataManager()
     
+    var photoManager = PhotoPickerViewController()
      let gcd = GCDUploader()
     let optionals = OperationUploader()
-    
+    let netService = NetworkService.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         kB()
         loadDataGCD()
+//        photoManager.photoDelegate = self
         profileImage.isUserInteractionEnabled = true
         let imageGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap(_:)))
         profileImage.addGestureRecognizer(imageGesture)
@@ -87,6 +90,21 @@ class ProfileViewController: UIViewController {
         profileImage.isUserInteractionEnabled = true
     }
     
+    func updatePhoto(url: ImageURL) {
+        secondNameLabel.isHidden = true
+        firstNameLabel.isHidden = true
+        let ph = url.largeImageURL
+        print("URL URL", url)
+        netService.getImage(url: ph) { (image) in
+            guard let photo = image else {return print("Fail take photo")}
+            DispatchQueue.main.async {
+                print("URL URL", url)
+                    self.profileImage.image = photo
+            }
+            
+        }
+    }
+  
     @IBAction func gcdActionButton(_ sender: Any) {
         saveGCD()
         saveGCDButton.isUserInteractionEnabled = false
@@ -127,6 +145,14 @@ class ProfileViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Choose from Photo Library", style: .default, handler: { _ in
             self.didTapUIImage(from: .photoLibrary)
+        }))
+        alert.addAction(UIAlertAction(title: "Choose from Internet", style: .default, handler: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let photoPicker = storyboard.instantiateViewController(withIdentifier: "ShowPhotoPicker") as? PhotoPickerViewController else { return }
+            photoPicker.photoDelegate = self
+//            self.show(photoPicker, sender: nil)
+            self.present(photoPicker, animated: true, completion: nil)
+            
         }))
         alert.addAction(UIAlertAction(title: "Take Picture with Camera", style: .default, handler: {_ in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {

@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -304,6 +305,86 @@
             </objects>
             <point key="canvasLocation" x="3147.826086956522" y="157.33695652173915"/>
         </scene>
+        <!--Photo Picker View Controller-->
+        <scene sceneID="48L-bd-OhE">
+            <objects>
+                <viewController storyboardIdentifier="ShowPhotoPicker" id="jdt-h3-Qbw" customClass="PhotoPickerViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E0m-Zc-kob">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7bF-Ry-V2z">
+                                <rect key="frame" x="0.0" y="-14" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="h85-dg-KvP"/>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FGA-cL-0NB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="H3J-ye-Obe">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="m0H-fB-JQ5">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="0.89411764709999997" green="0.90980392160000001" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </activityIndicatorView>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="customCell" id="KBZ-Zu-q2h" customClass="PhotoPickerCollectionViewCell" customModule="Tinkoff_first_app" customModuleProvider="target">
+                                        <rect key="frame" x="4" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nbb-KW-chy">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserImage" translatesAutoresizingMaskIntoConstraints="NO" id="9Ok-tA-06i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Ok-tA-06i" firstAttribute="top" secondItem="nbb-KW-chy" secondAttribute="top" id="1ai-i6-bFH"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Ok-tA-06i" secondAttribute="trailing" id="D4o-S9-WER"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Ok-tA-06i" secondAttribute="bottom" id="cGN-dN-t10"/>
+                                                <constraint firstItem="9Ok-tA-06i" firstAttribute="leading" secondItem="nbb-KW-chy" secondAttribute="leading" id="nVn-Xd-AFi"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageForCell" destination="9Ok-tA-06i" id="dUI-0b-9Ww"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NzW-61-BtU"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NzW-61-BtU" firstAttribute="trailing" secondItem="FGA-cL-0NB" secondAttribute="trailing" id="H60-d6-IbZ"/>
+                            <constraint firstItem="FGA-cL-0NB" firstAttribute="leading" secondItem="NzW-61-BtU" secondAttribute="leading" id="YXS-Oj-Tl6"/>
+                            <constraint firstItem="NzW-61-BtU" firstAttribute="bottom" secondItem="FGA-cL-0NB" secondAttribute="bottom" id="gdp-Ta-NTS"/>
+                            <constraint firstItem="FGA-cL-0NB" firstAttribute="top" secondItem="NzW-61-BtU" secondAttribute="top" id="hA5-V5-iqu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NOt-G3-uGm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="wmv-c2-c7s">
+                            <connections>
+                                <action selector="cancel:" destination="jdt-h3-Qbw" id="983-bq-JBo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="m0H-fB-JQ5" id="mKK-82-NEa"/>
+                        <outlet property="collectionView" destination="FGA-cL-0NB" id="lne-TU-Lw8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NtW-ma-JgV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3148" y="849"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="o6x-m3-V0o">
             <objects>
@@ -475,6 +556,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XBn-EU-tOX">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BGq-j5-25h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gsU-C7-2Up" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jlQ-e7-ElH">
@@ -486,7 +568,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uXa-Xt-AhH"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BGq-j5-25h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2208.8000000000002" y="157.87106446776613"/>
         </scene>

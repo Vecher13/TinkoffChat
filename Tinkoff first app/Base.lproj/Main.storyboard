@@ -34,7 +34,7 @@
                             </barButtonItem>
                             <barButtonItem image="UserImage" id="JNO-ej-gxC">
                                 <connections>
-                                    <segue destination="gsU-C7-2Up" kind="presentation" id="ozZ-1I-kfM"/>
+                                    <segue destination="gsU-C7-2Up" kind="custom" customClass="TransitionManager" customModule="Tinkoff_first_app" customModuleProvider="target" id="Nzv-6F-B9i"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -116,14 +116,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="Tinkoff_first_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-Ri-r6u">
-                                <rect key="frame" x="0.0" y="46" width="414" height="670"/>
+                                <rect key="frame" x="0.0" y="34" width="414" height="702"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YfM-WH-Y7P">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="660"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="702"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4z1-fF-OWj">
                                                 <rect key="frame" x="90" y="20" width="234" height="370"/>
@@ -191,21 +191,27 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nuR-uU-WTw">
-                                                <rect key="frame" x="30" y="490" width="354" height="80"/>
+                                                <rect key="frame" x="30" y="480" width="354" height="100"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="XH6-c7-zce">
-                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="40"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R25-8h-Ndx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="169.33333333333334" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="169.33333333333334" height="40"/>
                                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                                                <state key="normal" title="Save GCD"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="iH5-G7-uAs"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <state key="normal" title="Save">
+                                                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
                                                                 <connections>
                                                                     <action selector="gcdActionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tOH-XI-dRY"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ5-db-W8V">
-                                                                <rect key="frame" x="184.33333333333337" y="0.0" width="169.66666666666663" height="30"/>
+                                                                <rect key="frame" x="184.33333333333337" y="0.0" width="169.66666666666663" height="40"/>
                                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                                 <state key="normal" title="Save Operations"/>
                                                                 <connections>
@@ -215,16 +221,21 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Jv-ba-UTe">
-                                                        <rect key="frame" x="0.0" y="50" width="354" height="30"/>
+                                                        <rect key="frame" x="0.0" y="60" width="354" height="40"/>
                                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                                        <state key="normal" title="Cancel"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="hmq-aY-q7g"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" systemColor="systemRedColor"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="cancelSave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8AJ-qa-pMf"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="4PA-Gz-jdq"/>
                                                     <constraint firstItem="1Jv-ba-UTe" firstAttribute="leading" secondItem="nuR-uU-WTw" secondAttribute="leading" id="bgt-ro-Qwc"/>
                                                     <constraint firstAttribute="trailing" secondItem="XH6-c7-zce" secondAttribute="trailing" id="fn4-rS-HAd"/>
                                                     <constraint firstAttribute="trailing" secondItem="1Jv-ba-UTe" secondAttribute="trailing" id="irh-0d-ue1"/>
@@ -232,7 +243,7 @@
                                                 </constraints>
                                             </stackView>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CfC-zY-e3l">
-                                                <rect key="frame" x="188.66666666666666" y="311.66666666666669" width="37" height="37"/>
+                                                <rect key="frame" x="188.66666666666666" y="332.66666666666669" width="37" height="37"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -289,6 +300,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="CfC-zY-e3l" id="gIz-Ma-96L"/>
+                        <outlet property="cancelButton" destination="1Jv-ba-UTe" id="7Ha-8t-Zqn"/>
                         <outlet property="editButton" destination="wKg-4K-IEG" id="K0U-eI-7ZI"/>
                         <outlet property="firstNameLabel" destination="hjK-zb-iWY" id="xAq-Dk-ZaU"/>
                         <outlet property="infoLabel" destination="41S-NX-YWe" id="P7b-A3-Y7S"/>
@@ -559,8 +571,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BGq-j5-25h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gsU-C7-2Up" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="6C8-1M-Ncd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jlQ-e7-ElH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -569,7 +582,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2208.8000000000002" y="157.87106446776613"/>
+            <point key="canvasLocation" x="2201" y="232"/>
         </scene>
     </scenes>
     <resources>
@@ -589,6 +602,9 @@
         </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

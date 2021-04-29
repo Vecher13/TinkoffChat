@@ -11,6 +11,8 @@
 		5E0599682602935B00992952 /* GCDUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0599672602935B00992952 /* GCDUploader.swift */; };
 		5E05996C2602B3A600992952 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E05996B2602B3A600992952 /* Options.swift */; };
 		5E0599B426040FEA00992952 /* CommonsThreadSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */; };
+		5E1434F1263B15010055425A /* CAEmitterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1434F0263B15010055425A /* CAEmitterLayer.swift */; };
+		5E1434FD263B40CB0055425A /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1434FC263B40CB0055425A /* TransitionManager.swift */; };
 		5E2201F925DD98000079BFD0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5E2201F825DD98000079BFD0 /* .gitignore */; };
 		5E5FFAFF260917DE006FA1E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E5FFAFE260917DE006FA1E8 /* GoogleService-Info.plist */; };
 		5E75E49326132420000A1092 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E75E49226132420000A1092 /* CoreDataStack.swift */; };
@@ -52,6 +54,8 @@
 		5E0599672602935B00992952 /* GCDUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDUploader.swift; sourceTree = "<group>"; };
 		5E05996B2602B3A600992952 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		5E0599B326040FEA00992952 /* CommonsThreadSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonsThreadSettings.swift; sourceTree = "<group>"; };
+		5E1434F0263B15010055425A /* CAEmitterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAEmitterLayer.swift; sourceTree = "<group>"; };
+		5E1434FC263B40CB0055425A /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		5E2201F825DD98000079BFD0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5E5FFAFE260917DE006FA1E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E75E49226132420000A1092 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				5ED5C71B260A7BF600C97C0A /* FirebaseStructs.swift */,
 				5EA918C425F953DB00EC9A66 /* With.swift */,
 				5EC550D8262F6CF80087D6EA /* PhotoPickerDataModel.swift */,
+				5E1434FC263B40CB0055425A /* TransitionManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				5EAB77AD25D93BBE00D0DE14 /* LogController.swift */,
 				5ED7F75026278918008FFF60 /* FirebaseService.swift */,
 				5EA451AE25F7CFB400DDE495 /* SettingsViewController.swift */,
+				5E1434F0263B15010055425A /* CAEmitterLayer.swift */,
 			);
 			name = "Service Layer";
 			sourceTree = "<group>";
@@ -372,6 +378,8 @@
 				5EA918C525F953DB00EC9A66 /* With.swift in Sources */,
 				5EAB77AE25D93BBE00D0DE14 /* LogController.swift in Sources */,
 				5EA451AF25F7CFB400DDE495 /* SettingsViewController.swift in Sources */,
+				5E1434FD263B40CB0055425A /* TransitionManager.swift in Sources */,
+				5E1434F1263B15010055425A /* CAEmitterLayer.swift in Sources */,
 				5E88892025F80DD200C97728 /* CustomView.swift in Sources */,
 				5EF3704D2600A503008DD0EF /* HandelJSON.swift in Sources */,
 				5EA451B325F7E6E900DDE495 /* ThemesModel.swift in Sources */,

@@ -28,6 +28,7 @@ class ChatListViewController: UIViewController, NSFetchedResultsControllerDelega
     let nameColor = ThemesManager.shared.theme?.labelTextColor
     var channelsList = [Channel]()
 //    let fireBaseService = FirebaseService.share
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        fireBaseService.getChannelsList()

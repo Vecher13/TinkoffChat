@@ -25,8 +25,6 @@ class TinkoffFirstAppTests: XCTestCase {
     
     func testApiCallCompletes() throws {
       // given
-        let network = NetworkService()
-        
        let urlFromController = PhotoPickerViewController().url
         guard let url = urlFromController else { return }
       let feedBack = expectation(description: "Completion handler invoked")
@@ -35,10 +33,6 @@ class TinkoffFirstAppTests: XCTestCase {
 
       // when
         
-        network.getURL(url: url) { comp in
-
-            statusCode = (comp as? HTTPURLResponse)?.statusCode
-        }
       let dataTask = sut.dataTask(with: url) { _, response, error in
         statusCode = (response as? HTTPURLResponse)?.statusCode
         responseError = error

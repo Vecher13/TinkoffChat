@@ -7,20 +7,7 @@
 
 import XCTest
 
-class Tinkoff_first_appUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+class TinkoffFirstAppUITests: XCTestCase {
 
     func testExample() throws {
         // UI tests must launch the application that they test.
@@ -31,6 +18,10 @@ class Tinkoff_first_appUITests: XCTestCase {
         _ = profileButton.waitForExistence(timeout: 5.0)
         profileButton.tap()
 
+        let nameTF = app.textFields["name TF"]
+        let infoTV = app.textViews["info TV"]
+        XCTAssertTrue(nameTF.exists, "TF is not here")
+        XCTAssertTrue(infoTV.exists, "TV is not here")
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

@@ -56,6 +56,8 @@ class ProfileViewController: UIViewController, DidUpdatePhoto {
         nameLabel.isUserInteractionEnabled = false
         infoLabel.isUserInteractionEnabled = false
         profileImage.isUserInteractionEnabled = false
+        nameLabel.accessibilityIdentifier = "name TF"
+        infoLabel.accessibilityIdentifier = "info TV"
         nameLabel.text = "Marina Dudarenko"
         infoLabel.text = "UX/UI designer, web-designer Moscow, Russia"
         

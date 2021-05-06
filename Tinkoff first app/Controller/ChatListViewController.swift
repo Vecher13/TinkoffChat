@@ -32,6 +32,7 @@ class ChatListViewController: UIViewController, NSFetchedResultsControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 //        fireBaseService.getChannelsList()
+        barButton.accessibilityIdentifier = "Profile"
         getChannelsList()
       setupVuew()
        

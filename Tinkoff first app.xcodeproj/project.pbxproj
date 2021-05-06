@@ -20,7 +20,10 @@
 		5E7C2E0F25ED5B2A00A3B02D /* CustoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */; };
 		5E7C2E1025ED5B2A00A3B02D /* CustoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */; };
 		5E7C2E1325ED739400A3B02D /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */; };
+		5E7EF6AF26447B55006AF567 /* Tinkoff_first_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7EF6AE26447B55006AF567 /* Tinkoff_first_appTests.swift */; };
+		5E7EF6B626447B9B006AF567 /* Pods_Tinkoff_first_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */; };
 		5E80C15D25F17C3E00B75A0E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E80C15C25F17C3E00B75A0E /* DataModel.swift */; };
+		5E84577F2644A2C10080063D /* Tinkoff_first_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84577E2644A2C10080063D /* Tinkoff_first_appUITests.swift */; };
 		5E88892025F80DD200C97728 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E88891F25F80DD200C97728 /* CustomView.swift */; };
 		5E8961A325F03BCA00703A61 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A225F03BCA00703A61 /* ChatViewController.swift */; };
 		5E8961A725F03C0300703A61 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */; };
@@ -48,6 +51,23 @@
 		601EA38C78EBCB71703860A4 /* Pods_Tinkoff_first_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C17FA038B6A096553A3039 /* Pods_Tinkoff_first_app.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5E7EF6B126447B55006AF567 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EE3286625D7FB4700BFB563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EE3286D25D7FB4800BFB563;
+			remoteInfo = "Tinkoff first app";
+		};
+		5E8457812644A2C10080063D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EE3286625D7FB4700BFB563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EE3286D25D7FB4800BFB563;
+			remoteInfo = "Tinkoff first app";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		2D475A29A3466EFEDD85310D /* Pods-Tinkoff first app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinkoff first app.release.xcconfig"; path = "Target Support Files/Pods-Tinkoff first app/Pods-Tinkoff first app.release.xcconfig"; sourceTree = "<group>"; };
 		5E05996426014A2D00992952 /* jsonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = jsonData.json; sourceTree = "<group>"; };
@@ -63,7 +83,13 @@
 		5E7C2E0D25ED5B2A00A3B02D /* CustoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustoTableViewCell.swift; sourceTree = "<group>"; };
 		5E7C2E0E25ED5B2A00A3B02D /* CustoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustoTableViewCell.xib; sourceTree = "<group>"; };
 		5E7C2E1225ED739400A3B02D /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		5E7EF6AC26447B55006AF567 /* Tinkoff first appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tinkoff first appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E7EF6AE26447B55006AF567 /* Tinkoff_first_appTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tinkoff_first_appTests.swift; sourceTree = "<group>"; };
+		5E7EF6B026447B55006AF567 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E80C15C25F17C3E00B75A0E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		5E84577C2644A2C10080063D /* Tinkoff first appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tinkoff first appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E84577E2644A2C10080063D /* Tinkoff_first_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tinkoff_first_appUITests.swift; sourceTree = "<group>"; };
+		5E8457802644A2C10080063D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E88891F25F80DD200C97728 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		5E8961A225F03BCA00703A61 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5E8961A525F03C0300703A61 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -95,6 +121,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5E7EF6A926447B55006AF567 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E7EF6B626447B9B006AF567 /* Pods_Tinkoff_first_app.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E8457792644A2C10080063D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EE3286B25D7FB4800BFB563 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,6 +154,24 @@
 				2D475A29A3466EFEDD85310D /* Pods-Tinkoff first app.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E7EF6AD26447B55006AF567 /* Tinkoff first appTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E7EF6AE26447B55006AF567 /* Tinkoff_first_appTests.swift */,
+				5E7EF6B026447B55006AF567 /* Info.plist */,
+			);
+			path = "Tinkoff first appTests";
+			sourceTree = "<group>";
+		};
+		5E84577D2644A2C10080063D /* Tinkoff first appUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5E84577E2644A2C10080063D /* Tinkoff_first_appUITests.swift */,
+				5E8457802644A2C10080063D /* Info.plist */,
+			);
+			path = "Tinkoff first appUITests";
 			sourceTree = "<group>";
 		};
 		5E8C303D25F55E560010BEA0 /* View */ = {
@@ -160,6 +219,8 @@
 			children = (
 				5E2201F825DD98000079BFD0 /* .gitignore */,
 				5EE3287025D7FB4800BFB563 /* Tinkoff first app */,
+				5E7EF6AD26447B55006AF567 /* Tinkoff first appTests */,
+				5E84577D2644A2C10080063D /* Tinkoff first appUITests */,
 				5EE3286F25D7FB4800BFB563 /* Products */,
 				354EED42164E0D4F900D1D1F /* Pods */,
 				C92DFD962D84B57AA5DAA1C9 /* Frameworks */,
@@ -170,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				5EE3286E25D7FB4800BFB563 /* Tinkoff first app.app */,
+				5E7EF6AC26447B55006AF567 /* Tinkoff first appTests.xctest */,
+				5E84577C2644A2C10080063D /* Tinkoff first appUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +301,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5E7EF6AB26447B55006AF567 /* Tinkoff first appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E7EF6B326447B55006AF567 /* Build configuration list for PBXNativeTarget "Tinkoff first appTests" */;
+			buildPhases = (
+				5E7EF6A826447B55006AF567 /* Sources */,
+				5E7EF6A926447B55006AF567 /* Frameworks */,
+				5E7EF6AA26447B55006AF567 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E7EF6B226447B55006AF567 /* PBXTargetDependency */,
+			);
+			name = "Tinkoff first appTests";
+			productName = "Tinkoff first appTests";
+			productReference = 5E7EF6AC26447B55006AF567 /* Tinkoff first appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5E84577B2644A2C10080063D /* Tinkoff first appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E8457852644A2C10080063D /* Build configuration list for PBXNativeTarget "Tinkoff first appUITests" */;
+			buildPhases = (
+				5E8457782644A2C10080063D /* Sources */,
+				5E8457792644A2C10080063D /* Frameworks */,
+				5E84577A2644A2C10080063D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E8457822644A2C10080063D /* PBXTargetDependency */,
+			);
+			name = "Tinkoff first appUITests";
+			productName = "Tinkoff first appUITests";
+			productReference = 5E84577C2644A2C10080063D /* Tinkoff first appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		5EE3286D25D7FB4800BFB563 /* Tinkoff first app */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EE3288225D7FB4800BFB563 /* Build configuration list for PBXNativeTarget "Tinkoff first app" */;
@@ -264,9 +363,17 @@
 		5EE3286625D7FB4700BFB563 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					5E7EF6AB26447B55006AF567 = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 5EE3286D25D7FB4800BFB563;
+					};
+					5E84577B2644A2C10080063D = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 5EE3286D25D7FB4800BFB563;
+					};
 					5EE3286D25D7FB4800BFB563 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -286,11 +393,27 @@
 			projectRoot = "";
 			targets = (
 				5EE3286D25D7FB4800BFB563 /* Tinkoff first app */,
+				5E7EF6AB26447B55006AF567 /* Tinkoff first appTests */,
+				5E84577B2644A2C10080063D /* Tinkoff first appUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5E7EF6AA26447B55006AF567 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E84577A2644A2C10080063D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EE3286C25D7FB4800BFB563 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,6 +491,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5E7EF6A826447B55006AF567 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E7EF6AF26447B55006AF567 /* Tinkoff_first_appTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E8457782644A2C10080063D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E84577F2644A2C10080063D /* Tinkoff_first_appUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5EE3286A25D7FB4800BFB563 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,6 +546,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5E7EF6B226447B55006AF567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EE3286D25D7FB4800BFB563 /* Tinkoff first app */;
+			targetProxy = 5E7EF6B126447B55006AF567 /* PBXContainerItemProxy */;
+		};
+		5E8457822644A2C10080063D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EE3286D25D7FB4800BFB563 /* Tinkoff first app */;
+			targetProxy = 5E8457812644A2C10080063D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		5EE3287725D7FB4800BFB563 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -427,6 +579,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5E7EF6B426447B55006AF567 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SDR7T3U5EH;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				INFOPLIST_FILE = "Tinkoff first appTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vecher13.Tinkoff-first-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinkoff first app.app/Tinkoff first app";
+			};
+			name = Debug;
+		};
+		5E7EF6B526447B55006AF567 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SDR7T3U5EH;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"",
+				);
+				INFOPLIST_FILE = "Tinkoff first appTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vecher13.Tinkoff-first-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tinkoff first app.app/Tinkoff first app";
+			};
+			name = Release;
+		};
+		5E8457832644A2C10080063D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SDR7T3U5EH;
+				INFOPLIST_FILE = "Tinkoff first appUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vecher13.Tinkoff-first-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tinkoff first app";
+			};
+			name = Debug;
+		};
+		5E8457842644A2C10080063D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SDR7T3U5EH;
+				INFOPLIST_FILE = "Tinkoff first appUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Vecher13.Tinkoff-first-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tinkoff first app";
+			};
+			name = Release;
+		};
 		5EE3288025D7FB4800BFB563 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -588,6 +832,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5E7EF6B326447B55006AF567 /* Build configuration list for PBXNativeTarget "Tinkoff first appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E7EF6B426447B55006AF567 /* Debug */,
+				5E7EF6B526447B55006AF567 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E8457852644A2C10080063D /* Build configuration list for PBXNativeTarget "Tinkoff first appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E8457832644A2C10080063D /* Debug */,
+				5E8457842644A2C10080063D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5EE3286925D7FB4700BFB563 /* Build configuration list for PBXProject "Tinkoff first app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

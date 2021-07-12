@@ -5,9 +5,9 @@
 //  Created by Ash on 13.02.2021.
 //
 
-//import UIKit
+// import UIKit
 //
-//class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+// class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
 //    var window: UIWindow?
 //
@@ -48,5 +48,5 @@
 //    }
 //
 //
-//}
+// }
 //

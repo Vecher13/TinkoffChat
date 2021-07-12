@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChannelBD" representedClassName="ChannelBD" syncable="YES" codeGenerationType="class">
+        <attribute name="identifier" attributeType="String"/>
+        <attribute name="lastActivity" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastMessage" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="messageBD" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MessageBD" inverseName="channelBD" inverseEntity="MessageBD"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="MessageBD" representedClassName="MessageBD" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="senderId" optional="YES" attributeType="String"/>
+        <attribute name="senderName" optional="YES" attributeType="String"/>
+        <relationship name="channelBD" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelBD" inverseName="messageBD" inverseEntity="ChannelBD"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="identifier"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="ChannelBD" positionX="-388.217529296875" positionY="151.9075164794922" width="128" height="104"/>
+        <element name="MessageBD" positionX="-126.803955078125" positionY="421.5828552246094" width="128" height="28"/>
+    </elements>
+</model>
